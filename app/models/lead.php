@@ -377,7 +377,7 @@ public function Insertlead($data)
 	  $d = date('s');	
 	  $tid = $y.$m.$d; 
      $comment_status = "1";
-	$this->db->query('INSERT INTO lead (lead_id, leadowner, customertype, customername, company, industry,leadsource, phone, mobile, email, vertical,oem,product, leadstatus, assignee, ordervalue, closuredate, status, comment_status) VALUES (:tid, :leadowner, :customertype, :customername, :company, :industry,  :leadsource, :phone, :mobile, :email, :vertical, :oem,:product, :leadstatus, :assignee, :ordervalue, :closuredate, :status, :comment_status)');
+	$this->db->query('INSERT INTO lead (lead_id, leadowner, customertype, customername, company, industry,leadsource, phone, mobile, email, vertical,oem,product, leadstatus, assignee, ordervalue, closuredate, status,paymentperiod, comment_status) VALUES (:tid, :leadowner, :customertype, :customername, :company, :industry,  :leadsource, :phone, :mobile, :email, :vertical, :oem,:product, :leadstatus, :assignee, :ordervalue, :closuredate, :status, :paymentperiod, :comment_status)');
 	$this->db->bind(':tid', $tid);
 	$this->db->bind(':leadowner', $data['leadowner']);
 	$this->db->bind(':customertype', $data['customertype']);
@@ -396,6 +396,7 @@ public function Insertlead($data)
 	$this->db->bind(':ordervalue', $data['ordervalue']);
 	$this->db->bind(':closuredate', $data['closuredate']);
 	$this->db->bind(':status', $data['status']);
+	$this->db->bind(':paymentperiod', $data['paymentperiod']);
 	$this->db->bind(':comment_status', $comment_status);
 	
 	 if($this->db->execute())

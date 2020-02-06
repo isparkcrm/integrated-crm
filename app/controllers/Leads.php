@@ -28,6 +28,7 @@ $data =[
  'assignee' => trim($_POST['assignee']),
  'ordervalue' => trim($_POST['ordervalue']),
  'closuredate' => trim($_POST['closuredate']),
+ 'paymentperiod' => trim($_POST['paymentperiod']),
  'status' => trim($_POST['status']),
  'leadowner_err' => '',         
   'customertype_err' => '',
