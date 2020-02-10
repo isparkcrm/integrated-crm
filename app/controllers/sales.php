@@ -15,7 +15,8 @@
 	 
  public function index_new()
  {
-  $assignee=$_SESSION['email'];
+	$assignee= $_SESSION['email'];
+   
 	 $data['commit']=$this->leadModel->commitlead($assignee); 
 	 $data['upside']=$this->leadModel->upsidelead($assignee); 
 	 $data['leadcount']=$this->leadModel->leadcount($assignee); 
@@ -26,7 +27,7 @@
 	 $data['lostlead']=$this->leadModel->lostlead($assignee);
 	 $data['todolist'] = $this->leadModel->getalltodolist($assignee);
 	 $this->view('sales/index_new',$data);
-}
+	}
  //---------------------------------------------------------------------------------------------------------- 
  public function addcustomer()
  {

@@ -44,6 +44,7 @@ use PHPMailer\PHPMailer\Exception;
                         users.name as name,
                         users.number as number,
                         users.role as role,
+						users.flag as flag,
                         users.password as password,
                          users.status as status
                         FROM users

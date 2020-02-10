@@ -8,7 +8,7 @@
     define('APPROOT', dirname(dirname(__FILE__)));
 
     //URL Root
-    define('URLROOT', 'http://isparkcrm.com/integrated-crm');
+    define('URLROOT', 'http://localhost/integrated-crm');
 
     //Site Name
     define('SITENAME', 'iSPARK-Service CRM');
