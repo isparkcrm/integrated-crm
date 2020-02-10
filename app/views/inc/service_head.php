@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION['id'])){
+  redirect('users/index_new');
+}
+?>
 <div class="container-scroller">
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
@@ -133,6 +138,12 @@
               <span class="menu-title"> Close Tickets</span>
             </a>
           </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/tickets/userwise_report">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title"> Userwise Report</span>
+            </a>
+          </li> 
 
      
               </ul>
@@ -213,6 +224,104 @@
         <!-- *********************************************  Client Setup**************************************************************   -->
          <?php 
          }
+          else  if($_SESSION['role']=="Administrator") {
+          ?>
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/posts/index_new">
+              <i class="menu-icon mdi mdi-television"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>       
+          
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/posts/showusers">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title">User Master</span>
+            </a>
+          </li>  
+                 
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/clients/clientlist">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title"> Partner Master</span>
+            </a>
+          </li>           
+         
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/clients/slalist">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title">SLA Master</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/campaign/campaignlist">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title"> Department Management</span>
+            </a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/campaign/escalation">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title"> Escalation Config</span>
+            </a>
+          </li> 
+             <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/clients/service">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title"> Service Master</span>
+            </a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/clients/notification">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title"> Notification Master</span>
+            </a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/clients/casestudy">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title"> Knowledge Base</span>
+            </a>
+          </li> 
+           
+       <!--   <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/campaign/outboundlist">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title"> Outbound Calls</span>
+            </a>
+          </li>   -->
+           <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#auth1" aria-expanded="false" aria-controls="auth">
+             <i class="menu-icon mdi mdi-settings"></i>
+              <span class="menu-title">Reports</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth1">
+              <ul class="nav flex-column sub-menu">      
+                 
+		    <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/posts/reports">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title">Open Tickets</span>
+            </a>
+          </li>  
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/Posts/reports_close">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title"> Closed Tickets</span>
+            </a>
+          </li> 
+           <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/tickets/userwise_report">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title"> Userwise Report</span>
+            </a>
+          </li> 
+              </ul>
+            </div>
+          </li>
+         <?php 
+         }
             else  if($_SESSION['role']=="Customer"){
             ?>
              <li class="nav-item">
@@ -278,7 +387,7 @@
               <span class="menu-title"> Closed Tickets</span>
             </a>
           </li> 
-
+ 
         
               </ul>
             </div>

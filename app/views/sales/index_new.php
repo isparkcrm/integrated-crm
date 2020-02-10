@@ -361,6 +361,8 @@ $(document).ready(function() {
 		   <li><span style="font-weight:700!important">Lead ID</span>:&emsp;<a href="<?php echo URLROOT;?>/leads/leadupdate/<?php echo $list->id;?>"><?php echo $list->lead_id;?></a><br>
 		   <span style="font-weight:700!important">Next Action</span>:&emsp;<?php echo $list->nextaction;?><br>
 		   <span style="font-weight:700!important">Customer Name</span>:&emsp;<?php echo $list->customername;?><br>
+		    <span style="font-weight:700!important">Next Action Updated By</span>:&emsp;<?php echo $list->action_by;?>
+		   <br>
           <span style="font-weight:700!important">Closure Date</span>:&emsp;<?php echo $list->closuredate;?><br>
 		   <span style="font-weight:700!important">Order Value</span>:&emsp;<?php echo $list->ordervalue;?>
 		   </li>

@@ -126,10 +126,13 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-      <script>
- $(document).ready(function() {
- $('#example').DataTable();
-});
+    <script>
+$(document).ready( function() {
+    $('#example').dataTable({
+        /* Disable initial sort */
+        "aaSorting": []
+    });
+})
  </script>
 
 <style type="text/css"> .menu-icon {

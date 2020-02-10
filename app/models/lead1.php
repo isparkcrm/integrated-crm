@@ -1,4 +1,6 @@
 <?php 
+use PHPMailer\PHPMailer\PHPMailerAutoload;
+use PHPMailer\PHPMailer\Exception;
   class Lead {
     private $db;
 
@@ -366,139 +368,16 @@ public function Insertmom($data)
      }
 }
  //---------------------------------------------------------------------------------------------------
-public function Insertlead($data,$user_email)
+public function Insertlead($data)
 {
-	$campaign_number='9843644039';
-	 $activity="Create";
-  $customer= $this->CustomerMessage($activity);
-   $cust=$customer[0]->customer_notification;
-  $email_msg1=$customer[0]->email_message;
-  $sms_msg1=$customer[0]->sms_message;
-  $hd=$customer[0]->helpdesk_notification;
-  $email_msg=$customer[0]->email_message1;
-  $sms_msg=$customer[0]->sms_message1; 
 //print_r($data);die;	
 	  date_default_timezone_set('Asia/Kolkata');
 	  $m = date('h');
 	  $y = date('i');
 	  $d = date('s');	
 	  $tid = $y.$m.$d; 
-	  
-	  
-	   if($hd=='email'){
-  
-  
-    $output='<p>New Lead created from</p>';
-    $output.=" ".$user_email.'<p>LeadID is &nbsp;' .$tid. ' </p>' ; 
-    $output.='<p>Thanks & Regards,</p>';
-    $output.='<p>Futurecalls Sales Team</p>';
-    $body = $output; 
-   // $subject =$tid."[".$data['title']."]";
-       $subject ="[". $tid."#]" .$data['company'];
-    $email_to = $data['assignee'];
-    
-    
-    $mail=new PHPMailer;
-    
-            
-            $mail->isSMTP();      
-            $mail->Host='czismtp.logix.in';
-            $mail->SMTPAuth=true; 
-            $mail->Username ='helpdesk@futurecalls.com';
-            $mail->Password = 'Pass@123'; 
-            // Enable this option to see deep debug info
-    
-            // $mail->SMTPDebug = 4; 
-    
-            $mail->SMTPSecure = 'tls';
-    
-            $mail->Port ='587';
-    
-            $mail->SetFrom('helpdesk@futurecalls.com'); 
-    
-            $mail-> addAddress($email_to); 
-           
-               $mail-> addAddress('vijayr@futurecalls.com'); 
-             // $mail-> addAddress('sridhar@Futurecalls.com'); 
-    
-            $mail->Subject=$subject;
-            $mail->Body = $body;
-            $mail->isHTML(true); 
-    
-    
-    $mail->SMTPOptions = array(
-        'ssl' => array(
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-            'allow_self_signed' => true
-             )
-           );
-    if(!$mail->Send()){
-    echo "Mailer Error: " . $mail->ErrorInfo;
-    }
- 
-  }
-  
-  //--------------------------------------------------------------------------------------------------------
-  //        *************************SMS- Helpdesk *********************************************
-  //---------------------------------------------------------------------------------------------------------
-  else if($hd=='sms'){
-    $username="";
-    $hash="";
-    $test="0";
-    $sender="TXTLCL"; 
-    $numbers=$campaign_number;
-    $message=$sms_msg;
-    $message.=" ".$user_email." " . 'Your ticket number is' .$tid ; 
-   
-            
-  // then update the message with the ending
-  ;
-  // Message details
-  
-  $message = urlencode($message); 
-  
-  // Prepare data for POST request
-  $data1 = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
-  
-  // Send the POST request with cURL
-  $ch = curl_init('https://api.textlocal.in/send/?');
-  curl_setopt($ch, CURLOPT_POST, true);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, $data1);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-  $response = curl_exec($ch);
-  curl_close($ch);  
-  // Process your response here
-  echo $response;
-  print_r($response);die;
-  }
-  
-  else{
-	 $INSTANCE_ID = '24';  // TODO: Replace it with your gateway instance ID here
-$CLIENT_ID = "shahinsha@futurecalls.com";  // TODO: Replace it with your Forever Green client ID here
-$CLIENT_SECRET = "66d45ae013534497af5ac7409feb82af";   // TODO: Replace it with your Forever Green client secret here
-$postData = array(
-  'number' =>$campaign_number,  // TODO: Specify the recipient's number here. NOT the gateway number
-  'message' => $sms_msg." " .$user_email." " . 'Your ticket number is' .$tid 
-);
-$headers = array(
-  'Content-Type: application/json',
-  'X-WM-CLIENT-ID: '.$CLIENT_ID,
-  'X-WM-CLIENT-SECRET: '.$CLIENT_SECRET
-);
-$url = 'http://api.whatsmate.net/v3/whatsapp/single/text/message/' . $INSTANCE_ID;
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
-$response = curl_exec($ch);
-echo "Response: ".$response;
-curl_close($ch);  
-  }
-	  	  
      $comment_status = "1";
-	$this->db->query('INSERT INTO lead (lead_id, leadowner, customertype, customername, company, industry,leadsource, phone, mobile, email, vertical,oem,product, leadstatus, assignee, ordervalue, closuredate,leadperiod, status, comment_status) VALUES (:tid, :leadowner, :customertype, :customername, :company, :industry,  :leadsource, :phone, :mobile, :email, :vertical, :oem,:product, :leadstatus, :assignee, :ordervalue, :closuredate,:leadperiod, :status, :comment_status)');
+	$this->db->query('INSERT INTO lead (lead_id, leadowner, customertype, customername, company, industry,leadsource, phone, mobile, email, vertical,oem,product, leadstatus, assignee, ordervalue, closuredate, status, comment_status) VALUES (:tid, :leadowner, :customertype, :customername, :company, :industry,  :leadsource, :phone, :mobile, :email, :vertical, :oem,:product, :leadstatus, :assignee, :ordervalue, :closuredate, :status, :comment_status)');
 	$this->db->bind(':tid', $tid);
 	$this->db->bind(':leadowner', $data['leadowner']);
 	$this->db->bind(':customertype', $data['customertype']);
@@ -516,10 +395,8 @@ curl_close($ch);
 	$this->db->bind(':assignee', $data['assignee']);
 	$this->db->bind(':ordervalue', $data['ordervalue']);
 	$this->db->bind(':closuredate', $data['closuredate']);
-	$this->db->bind(':leadperiod',$data['period']);
 	$this->db->bind(':status', $data['status']);
 	$this->db->bind(':comment_status', $comment_status);
-	
 	
 	 if($this->db->execute())
 	 {
@@ -530,20 +407,10 @@ curl_close($ch);
 		return false;
      }
 }
-//-----------------------------------------------------------------------------------------------------------
-public function CustomerMessage($activity)
-{
-	
-	$this->db->query('SELECT * FROM notification_master WHERE activity = :activity ');
-  $this->db->bind(':activity', $activity);
-  $results = $this->db->resultSet();
-	return $results;
-}
 
-//--------------------------------------------------------------------------------------------------------------
-public function Insertstatus($data,$user_email)
+public function Insertstatus($data)
 {
-	$this->db->query('INSERT INTO lead_update (lead_id,customername,company,industry,leadsource,phone,mobile,email,vertical,oem,product,leadstatus,assignee,ordervalue,closuredate,status,created_at, actiontaken, nextaction, nextactiondate,action_by) VALUES (:lead_id,:customername,:company,:industry,:leadsource,:phone,:mobile,:email,:vertical,:oem,:product,:leadstatus,:assignee,:ordervalue,:closuredate,:status,:created_at, :actiontaken, :nextaction, :nextactiondate,:action_by)');
+	$this->db->query('INSERT INTO lead_update (lead_id,customername,company,industry,leadsource,phone,mobile,email,vertical,oem,product,leadstatus,assignee,ordervalue,closuredate,status,created_at, actiontaken, nextaction, nextactiondate) VALUES (:lead_id,:customername,:company,:industry,:leadsource,:phone,:mobile,:email,:vertical,:oem,:product,:leadstatus,:assignee,:ordervalue,:closuredate,:status,:created_at, :actiontaken, :nextaction, :nextactiondate)');
 	$this->db->bind(':lead_id', $data['lead_id']);
 	$this->db->bind(':customername', $data['customername']);
 	$this->db->bind(':company', $data['company']);
@@ -564,7 +431,6 @@ public function Insertstatus($data,$user_email)
 	$this->db->bind(':actiontaken', $data['actiontaken']);
 	$this->db->bind(':nextaction', $data['nextaction']);
 	$this->db->bind(':nextactiondate', $data['nextactiondate']);
-	$this->db->bind(':action_by', $user_email);
 	 if($this->db->execute())
 	 {
 		return true;
@@ -579,7 +445,7 @@ public function Insertstatus($data,$user_email)
 {
 	
 	
-	$this->db->query('INSERT INTO closed_lead (lead_id,  customername, company, industry,leadsource,number,email ,vertical,oem, product, ordervalue, created_at,  closed_reason,leadperiod, status, assignee,closure_value,payment_mode,service_customer) VALUES (:lead_id,  :customername, :company, :industry, :leadsource,:number,:email,:vertical,:oem, :product, :ordervalue, :created_at, :closed_reason, :leadperiod, :status, :assignee,:closure_value,:payment_mode,:service_customer)');
+	$this->db->query('INSERT INTO closed_lead (lead_id,  customername, company, industry,leadsource,number,email ,vertical,oem, product, ordervalue, created_at,  closed_reason, status, assignee,closure_value,payment_mode,service_customer) VALUES (:lead_id,  :customername, :company, :industry, :leadsource,:number,:email,:vertical,:oem, :product, :ordervalue, :created_at, :closed_reason,  :status, :assignee,:closure_value,:payment_mode,:service_customer)');
 	$this->db->bind(':lead_id', $data['lead_id']);
 	
 	$this->db->bind(':customername', $data['customername']);
@@ -594,7 +460,6 @@ public function Insertstatus($data,$user_email)
 	$this->db->bind(':ordervalue', $data['ordervalue']);
 	$this->db->bind(':created_at', $data['created_at']);
 	$this->db->bind(':closed_reason', $data['confirmation']);
-	$this->db->bind(':leadperiod', $data['period']);
 	$this->db->bind(':status', $data['status']);
 	$this->db->bind(':assignee', $data['assignee']);
 	$this->db->bind('closure_value', $data['closure_value']);
@@ -619,9 +484,6 @@ public function AmcMaster($data)
       $m = date('h');
        $y = date('i');      
        $client_ID = $gid.$y.$m;
-	   
-	   $this->InsertClientMaster($client_ID,$data); 
-	   
 	$this->db->query('INSERT INTO amc_master (clientname,client_ID,contact_person,number,email,vertical,oem,product,ordervalue,start_date,end_date,accountmanager) VALUES ( :company,:client_ID, :customername,:mobile,:email, :vertical,:oem, :product, :ordervalue,:date1,:date2,:assignee)');
 	
 	
@@ -649,55 +511,6 @@ public function AmcMaster($data)
 		return false;
      }
 }
-//------------------------------------------------------------------------------------------------------
-public function InsertClientMaster($client_ID,$data)
-{
-	$time="24/7";
-		$this->InsertService($client_ID,$data);    
-	$this->db->query('INSERT INTO client_master (clientname,client_ID,contact_person,number,email,start_date,end_date,support_time) VALUES ( :company,:client_ID, :customername,:mobile,:email,:date1,:date2,:time)');
-	
-	$this->db->bind(':company', $data['company']);
-	$this->db->bind(':client_ID', $client_ID);
-    $this->db->bind(':customername', $data['customername']);
-    $this->db->bind(':mobile', $data['mobile']);
-    $this->db->bind(':email', $data['email']);	
-	$this->db->bind(':date1', $data['date1']);
-	$this->db->bind(':date2', $data['date2']);	
-	$this->db->bind(':time', $time);
-	
-	
-	 if($this->db->execute())
-	 {
-		return true;
-	 }
-	 else 
-	 {
-		return false;
-     }
-}
-//------------------------------------------------------------------------------------------------------
-public function InsertService($client_ID,$data)
-{
-	  $service = explode(",",$data['service']);
-        $total = sizeof($service);
-      
-        for($i=0;$i<$total;$i++) {
-        
-            $service1 = $service[$i];   
-   $this->db->query('SELECT id FROM service_master WHERE servicename = :service1 ');
-   $this->db->bind(':service1', $service1);  
-   $row = $this->db->single();
-    $id=$row->id;
-     $this->db->query('INSERT INTO client_service (client_ID,service,service_id) VALUES(:client_ID ,:service1, :service_id)');
-       $this->db->bind(':client_ID', $client_ID);
-       $this->db->bind(':service1', $service1);  
-       $this->db->bind(':service_id', $id);  
-      $this->db->execute();
-       
-       }
-       return true;
-       
-       }	  
 //------------------------------------------------------------------------------------------------------
 public function leaddrop($data)
 {
@@ -810,7 +623,7 @@ public function leadpostponed($data)
 //-----------------------------------------------------------------------------------------------------------------
 public function updateLead($data)
 {
-	$this->db->query('UPDATE Lead SET leadowner=:leadowner, customertype=:customertype, customername=:customername, company=:company, industry=:industry, leadsource=:leadsource,phone=:phone, mobile=:mobile, email=:email, vertical=:vertical, leadstatus=:leadstatus, oem=:oem,product=:product, assignee=:assignee, ordervalue=:ordervalue, closuredate=:closuredate,leadperiod=:leadperiod where id=:id');
+	$this->db->query('UPDATE Lead SET leadowner=:leadowner, customertype=:customertype, customername=:customername, company=:company, industry=:industry, leadsource=:leadsource,phone=:phone, mobile=:mobile, email=:email, vertical=:vertical, leadstatus=:leadstatus, oem=:oem,product=:product, assignee=:assignee, ordervalue=:ordervalue, closuredate=:closuredate where id=:id');
 	$this->db->bind(':id', $data['id']);
 	$this->db->bind(':leadowner', $data['leadowner']);
 	$this->db->bind(':customertype', $data['customertype']);
@@ -828,7 +641,6 @@ public function updateLead($data)
 	$this->db->bind(':assignee', $data['assignee']);
 	$this->db->bind(':ordervalue', $data['ordervalue']);
 	$this->db->bind(':closuredate', $data['closuredate']);
-	$this->db->bind(':leadperiod', $data['period']);
 	
     if($this->db->execute())
 	{
@@ -1202,6 +1014,7 @@ public function getcommittotal($accountmanager)
 	$total = $row->total;
 	return $total;
 }
+
 //--------------------------------------------------------------------------------------------------------------
 
 public function getupsidetotal1($accountmanager)
@@ -1218,8 +1031,7 @@ public function getupsidetotal1($accountmanager)
 	$total = $row->total;
 	return $total;
 }
-//------------------------------------------------------------------------------------------------------------------
-
+//--------------------------------------------------------------------------------------------------------------
 public function getleadtotal1($accountmanager)
 {
 	$status1='Open';
@@ -1234,6 +1046,7 @@ public function getleadtotal1($accountmanager)
 	$total = $row->total;
 	return $total;
 }
+
 //-------------------------------------------------------------------------------------------------------------------
 
 public function getcoldtotal1($accountmanager)
@@ -1269,39 +1082,11 @@ public function getcommittotal1()
 //--------------------------------------------------------------------------------------------------------------
 public function getupsidetotal()
 {
-		$status1='Open';
-	$status2='Postponed';
-	
-
-	$this->db->query('SELECT sum(ordervalue) as total from lead where leadstatus="Upside" and status=:status1  OR  leadstatus="Upside" and status=:status2');
-	$this->db->bind(':status1', $status1);
-	  $this->db->bind(':status2', $status2);
-	$row = $this->db->single();
-	$total = $row->total;
-	return $total;
-}
-//--------------------------------------------------------------------------------------------------------------
-public function getleadtotal()
-{
-		$status1='Open';
-	$status2='Postponed';
-	
-
-	$this->db->query('SELECT sum(ordervalue) as total from lead where leadstatus="Lead" and status=:status1  OR  leadstatus="Lead" and status=:status2');
-	$this->db->bind(':status1', $status1);
-	  $this->db->bind(':status2', $status2);
-	$row = $this->db->single();
-	$total = $row->total;
-	return $total;
-}
-//--------------------------------------------------------------------------------------------------------------
-public function getcoldtotal()
-{
 	$status1='Open';
 	$status2='Postponed';
-	
+	$user = $_SESSION['email'];
 
-	$this->db->query('SELECT sum(ordervalue) as total from lead where leadstatus="Cold" and status=:status1  OR  leadstatus="Cold" and status=:status2');
+	$this->db->query('SELECT sum(ordervalue) as total from lead where assignee="$user" and leadstatus="Upside" and status=:status1  OR assignee="$user" and leadstatus="Upside" and status=:status2');
 	$this->db->bind(':status1', $status1);
 	  $this->db->bind(':status2', $status2);
 	$row = $this->db->single();
@@ -1345,7 +1130,7 @@ public function getupsidelead()
 	return $results;
 }
 //--------------------------------------------------------------------------------------------------------------
-/*public function getcoldandlead()
+public function getcoldandlead()
 {
 	$status1='Close';
 	$status2='Lost';
@@ -1361,56 +1146,10 @@ public function getupsidelead()
 					lead.assignee as assignee,
 					lead.ordervalue as ordervalue
 					
-		FROM lead where leadstatus="Lead"  and status!=:status1 and status!=:status2 and status!=:status3 or leadstatus="Lead" and status!=:status1 and status!=:status2 and status!=:status3 ');
+					 FROM lead where leadstatus="Cold"  and status!=:status1 and status!=:status2 and status!=:status3 or leadstatus="Lead" and status!=:status1 and status!=:status2 and status!=:status3 ');
  $this->db->bind(':status1', $status1);
 	  $this->db->bind(':status2', $status2);
 	   $this->db->bind(':status3', $status3);
-	$results = $this->db->resultSet();
-	return $results;
-} */
-//-----------------------------------------------------------------------------------------------------------------
-public function getcoldandlead()
-{
-$status1='Open';
-		$status2='Postponed';
-
-	$this->db->query('SELECT *,
-					lead.id as id,
-					lead.lead_id as lead_id,
-					lead.customername as fname,
-					lead.product as product,
-					lead.company as company,
-					lead.leadsource as leadsource,
-					lead.closuredate as closuredate,
-					lead.assignee as assignee,
-					lead.ordervalue as ordervalue
-					
-					 FROM lead where leadstatus="Cold" and status=:status1 OR leadstatus="Cold" and status=:status2');
-	$this->db->bind(':status1', $status1);
-	$this->db->bind(':status2', $status2);
-	$results = $this->db->resultSet();
-	return $results;
-}
-//--------------------------------------------------------------------------------------------------------------
-public function getleadlead()
-{
-	$status1='Open';
-		$status2='Postponed';
-
-	$this->db->query('SELECT *,
-					lead.id as id,
-					lead.lead_id as lead_id,
-					lead.customername as fname,
-					lead.product as product,
-					lead.company as company,
-					lead.leadsource as leadsource,
-					lead.closuredate as closuredate,
-					lead.assignee as assignee,
-					lead.ordervalue as ordervalue
-					
-					 FROM lead where leadstatus="Lead" and status=:status1 OR leadstatus="Lead" and status=:status2');
-	$this->db->bind(':status1', $status1);
-	$this->db->bind(':status2', $status2);
 	$results = $this->db->resultSet();
 	return $results;
 }
@@ -1685,7 +1424,6 @@ public function getCloseLeadById($id){
 					lead.assignee as assignee,
 					lead.ordervalue as ordervalue,
 					lead.closuredate as closuredate,
-					lead.leadperiod as leadperiod,
 					lead.created_at as created_date
 					from lead where lead.id= :id");
 					 $this->db->bind(':id', $id);
@@ -1749,8 +1487,7 @@ public function getonlineLeadById($id){
 					lead.product as product,
 					lead.assignee as assignee,
 					lead.ordervalue as ordervalue,
-					lead.closuredate as closuredate,
-					lead.leadperiod as leadperiod
+					lead.closuredate as closuredate
 	from lead 
 	where lead.id= :id");
     $this->db->bind(':id', $id);
@@ -2546,40 +2283,4 @@ public function getpostlist()
 }
 
 //-------------------------------------------------------------------------------------------------------
-public function getnextAction($lead_id)
-{
-
-		$this->db->query('SELECT nextaction  FROM lead_update WHERE lead_id=:lead_id  ORDER BY updated_at DESC LIMIT 1 ');
-	
-	   $this->db->bind(':lead_id', $lead_id);
-	
-	//print_r($total);die;
-	
-	 if($this->db->single()){
-    $row = $this->db->single();
-	$total = $row->nextaction;
-	return $total;
-  } else {
-    return false;
-  }
-}
- //---------------------------------------------------------------------------------------------------
- public function getnextActiondate($lead_id)
-{
-
-		$this->db->query('SELECT nextactiondate  FROM lead_update WHERE lead_id=:lead_id  ORDER BY updated_at DESC LIMIT 1 ');
-	
-	   $this->db->bind(':lead_id', $lead_id);
-	
-	//print_r($total);die;
-	
-	 if($this->db->single()){
-    $row = $this->db->single();
-	$total = $row->nextactiondate;
-	return $total;
-  } else {
-    return false;
-  }
-}
- //---------------------------------------------------------------------------------------------------
 }

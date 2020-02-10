@@ -30,7 +30,7 @@
         <div class="content-wrapper">
           <div class="row purchace-popup">
             <div class="col-12">
-              
+               <a href="<?php echo URLROOT; ?>/leads/leadstatus" class="btn btn-info"><i class="fa fa-backward"></i> Back </a>
             </div>
           </div>
 <div class="col-12 grid-margin">
@@ -56,13 +56,14 @@
                          <input type="hidden" name="product" value="<?php echo $data['product'];?>" />
                           <input type="hidden" name="ordervalue" value="<?php echo $data['ordervalue'];?>" />
                            <input type="hidden" name="closuredate" value="<?php echo $data['closuredate'];?>" />
+						   <input type="hidden" name="period" value="<?php echo $data['period'];?>" />
                            <input type="hidden" name="created_at" value="<?php echo $data['created_at'];?>" />
 				   <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Closure Value<sup style="color:red;font-size:16px;">*</sup></label>
                           <div class="col-sm-9">
-						 <input type="number" name="closure_value" class="form-control"/> 
+						 <input type="number" name="closure_value" class="form-control" required="required"/> 
 						 <span class="alert-danger"><?php echo $data['closedvalue_err']; ?></span>
 						 </div>
                         </div>
@@ -73,8 +74,8 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Type Of Confirmation<sup style="color:red;font-size:16px;">*</sup></label>
                           <div class="col-sm-9">
-						  <select class="form-control" name="confirmation">
-						  <option value="--Select--" disabled="disabled" selected="selected">--Select--</option>
+						  <select class="form-control" name="confirmation" required="required">
+						  <option value="--Select--" disabled="disabled" selected="selected"></option>
 						  <option value="PO Collected">PO Collected</option>
 						  <option value="Email Received">Email Confirmation Received</option>
 						  </select>
@@ -88,7 +89,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Payment Mode<sup style="color:red;font-size:16px;">*</sup></label>
                           <div class="col-sm-9">
-              <select class="form-control" name="payment" required="">
+              <select class="form-control" name="payment" required="required">
               <option value="--Select--" disabled="disabled" selected="selected">--Select--</option>
               <option value="30">30 days</option>
               <option value="60">60 days</option>
@@ -140,16 +141,41 @@
                   </div>
                   <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">AMC start Date</label>
+                          <label class="col-sm-3 col-form-label">AMC End Date</label>
                           <div class="col-sm-9">
-                         <input type="date" name="date2" class="form-control"  placeholder="end date">                         
-                        
+                         <input type="date" name="date2" class="form-control"  placeholder="end date">                  
                         </div>
                       </div>
                     </div>                       
                  </div> 
                 
-                 
+             <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group row"> 
+                            <label class="col-sm-3 col-form-label"> Required Service </label>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                       <div class="form-group row">
+                       <?php 
+                              $groups = $this->campaignModel->getService();           
+                                ?>  
+                                <?php foreach($groups as $each){ ?>                         
+                          <div class="col-sm-3">
+                            <div class="form-checkbox">
+                              <label class="form-check-label">                              
+                             <input type="checkbox" name="service[]" value="<?php echo $each->servicename; ?>"/><?php echo $each->servicename; ?>
+                           
+                             </label>
+                            </div>
+                          </div>
+                          <?php } ?>    
+                          <span class="alert-danger"><?php echo $data['service_err']; ?></span>    
+                        </div>
+                      </div>
+                 </div>      
 </div>
 <script>
 function yesnoCheck() {
@@ -171,7 +197,7 @@ else document.getElementById('ifYes').style.display = 'none';
 				  <div class="col-sm-9">
 			   <input type="submit" style="background-color:rgba(27, 82, 151, 1);"  class="btn btn-success mr-2" value="Save">
 			   <button type="reset" class="btn btn-light">Cancel</button>
-			   <a href="<?php echo URLROOT; ?>/leads/leadstatus" class="btn btn-info"><i class="fa fa-backward"></i> Back </a>
+			  
 			   </div>
 			   </div>
 			   </div>

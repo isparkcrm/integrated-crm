@@ -38,7 +38,13 @@ table.dataTable td {
 <div class="main-panel">
         <div class="content-wrapper">
           <div class="row purchace-popup">
-        
+		  <div class="col-md-4">
+		  </div>
+        <div class="col-md-4">
+			<input type="search" id="myInput" placeholder="Please Search here..."  class="form-control">
+			</div>
+			<div class="col-md-4">
+			</div>
           </div>
    </div>
 
@@ -46,19 +52,20 @@ table.dataTable td {
 		<div class="card">
 		<div class="card-body">
 			<div class="table-responsive">
-			<table class="table table-hover dataTable table-striped" id="example">
+			<table class="table table-hover dataTable table-striped display" id="">
                   <thead>
 				  <tr style="background-color:#009688; color:white;">
 						<td></td> <td></td>
                                        <td> </td> 	<td style="text-align: center;">Commits</td><td></td> <td></td>
-                                       <td> </td> <td> </td> 
+                                       <td> </td> <td> </td> <td></td>
 						</tr>
                     <tr>
                           <th>Lead Id</th>  						 
                           <th>Company Name</th>  
 						  <th>Product</th>                  
                           <th>Value</th>						 
-						  <th>Lead Status</th>
+						    <th>Lead Period</th>						  
+						  <th>Next Action</th>
 						  <th>Assignee</th>	
 						   <th>Closure Date</th>   
                           <th>Actions</th>	
@@ -74,7 +81,16 @@ table.dataTable td {
 					<td><div class="wrap"><?php echo $leads->company;?></div></td> 
                     <td><div class="wrap"><?php echo $leads->product;?></div></td>            
                     <td><div class="wrap"><?php echo $leads->ordervalue;?></div></td>             
-                    <td><div class="wrap"><?php echo $leads->leadstatus;?></div></td>	
+                     <td><div class="wrap"><?php echo $leads->leadperiod;?></div></td>					
+                    <td>
+					<?php
+					$lead_id=$leads->lead_id;
+					  $nextaction=$this->leadModel->getnextAction($lead_id);
+					  $nextactiondate =$this->leadModel->getnextActiondate($lead_id);
+					  $nextaction1=$nextaction."  "."  ".'Action Date:'.$nextactiondate;
+					?>
+					<div class="wrap"><a href="#" style="color: black; text-decoration: none;" data-toggle="tooltip" title="<?php echo $nextaction1;?>"><?php echo $nextaction;?></a></div>
+					</td>		
                      <td><div class="wrap"><?php echo$leads->assignee;?></div></td>				
 				          <?php  
 				               date_default_timezone_set("Asia/Kolkata");
@@ -110,30 +126,32 @@ table.dataTable td {
 					</td>
 					 
 				 <?php endforeach;?>
-				   <tr style=" font-weight: bold; background-color: #4CAF50; color: white;"><td></td> <td></td>
+				 
+			  </tbody>
+			    <tr style=" font-weight: bold; background-color: #4CAF50; color: white;"><td></td> <td></td>
                                        <td> Total</td> 
                                      <td> <?php echo $data['committotal'];?></td>
-                                     <td></td><td></td><td></td><td></td> </tr>
-			  </tbody>
+                                     <td></td><td></td><td></td><td></td><td></td> </tr>
           </table>
 		 
 		  <br>
 <hr>
 
 <br>
-		  <table class="table table-hover dataTable table-striped" id="example1" >
+		  <table class="table table-hover dataTable table-striped display" id="" >
                   <thead>
 				  <tr style="background-color:#009688; color:white;">
 						<td></td> <td></td>
                                        <td> </td> 	<td style="text-align: center;">Upside</td><td></td> <td></td>
-                                       <td> </td> <td> </td> 
+                                       <td> </td> <td><td></td> </td> 
 						</tr>
                     <tr>
                           <th>Lead Id</th>  
 						  <th>Company Name</th>  
 						  <th>Product</th>            
                           <th>Value</th>						 
-						  <th>Lead Status</th>
+						  <th>Lead Period</th>						  
+						  <th>Next Action</th>
 						  <th>Assignee</th>	
 						  <th>Closure Date</th>   
                           <th>Actions</th>	
@@ -150,7 +168,16 @@ table.dataTable td {
 					<td><div class="wrap"><?php echo $leads->company;?></div></td> 
                     <td><div class="wrap"><?php echo $leads->product;?></div></td>            
                     <td><div class="wrap"><?php echo $leads->ordervalue;?></div></td>             
-                    <td><div class="wrap"><?php echo $leads->leadstatus;?></div></td>	
+                     <td><div class="wrap"><?php echo $leads->leadperiod;?></div></td>					
+                    <td>
+					<?php
+					$lead_id=$leads->lead_id;
+					  $nextaction=$this->leadModel->getnextAction($lead_id);
+					  $nextactiondate =$this->leadModel->getnextActiondate($lead_id);
+					  $nextaction1=$nextaction."  "."  ".'Action Date:'.$nextactiondate;
+					?>
+					<div class="wrap"><a href="#" style="color: black; text-decoration: none;" data-toggle="tooltip" title="<?php echo $nextaction1;?>"><?php echo $nextaction;?></a></div>
+					</td>	
                      <td><div class="wrap"><?php echo$leads->assignee;?></div></td>				
 				          <?php  
 				               date_default_timezone_set("Asia/Kolkata");
@@ -187,100 +214,102 @@ table.dataTable td {
 					 
                  </tr> 
 				 <?php endforeach;?>
+				 
+				
 			  </tbody>
+		  <tr style=" font-weight: bold; background-color: #4CAF50; color: white;"><td></td> <td></td>
+                                       <td> Total</td> 
+                                     <td> <?php echo $data['upsidetotal'];?></td>
+                                     <td></td><td></td><td></td><td></td> <td></td></tr>
           </table>
 		 <br>
 <hr>
 
 <br>
-		 <table class="table table-hover dataTable table-striped" id="example3" >
-                  <thead>
-				 <tr style="background-color:#009688; color:white;">
-						<td></td> <td></td>
-                                       <td> </td> 	<td style="text-align: center;"> Lead</td><td></td> <td></td>
-                                       <td> </td> <td> </td> 
-						</tr>
-                    <tr>
-                          <th>Lead Id</th>  
-						  <th>Company Name</th>  
-						  <th>Product</th>                  
-                          <th>Value</th>
-						
-						  <th>Lead Status</th>
-						  <th>Assignee</th>	
-						    <th>Closure Date</th>   
-                          <th>Actions</th>	
-                          
-						  
-					</tr>
-                  </thead>
-               <tbody id="myTable">
-			   <?php foreach($data['leadleadlist'] as $leads):?>
-			   
-			   
-			 <tr>
-				    <td><div class="wrap"><?php echo $leads->lead_id;?></div></td>
+		<table class="table table-hover dataTable table-striped display" id="" >
+			<thead>
+				<tr style="background-color:#009688; color:white;">
+					<td></td> <td></td><td></td><td style="text-align: center;"> Lead</td><td></td> <td></td><td> </td> <td><td></td> </td> 
+				</tr>
+				<tr>
+					<th>Lead Id</th>  
+					<th>Company Name</th>  
+					<th>Product</th>                  
+					<th>Value</th>	
+					<th>Lead Period</th>
+					<th>Next Action</th>
+					<th>Assignee</th>	
+					<th>Closure Date</th>   
+					<th>Actions</th>    
+				</tr>
+			</thead>
+			<tbody id="myTable">
+				<?php foreach($data['leadleadlist'] as $leads):?>
+				<tr>
+					<td><div class="wrap"><?php echo $leads->lead_id;?></div></td>
 					<td><div class="wrap"><?php echo $leads->company;?></div></td> 
                     <td><div class="wrap"><?php echo $leads->product;?></div></td>            
                     <td><div class="wrap"><?php echo $leads->ordervalue;?></div></td>             
-                    <td><div class="wrap"><?php echo $leads->leadstatus;?></div></td>	
-                     <td><div class="wrap"><?php echo$leads->assignee;?></div></td>				
-				          <?php  
-				               date_default_timezone_set("Asia/Kolkata");
-                                          $date1=date("Y-m-d");
-                                          
-                                          if($leads->closuredate < $date1)
-                                          { 
-                                          ?>      
-                                           <td style="background:red; color:white"><?php echo $leads->closuredate; ?></div></td>   
-                                           <?php
-                                           } 
-
-                                           else{
-                                            ?>
-                                             <td><?php echo $leads->closuredate ?></div></td>   
-                                             <?php
-                                           }
-                                           ?>        
-                  
+                    <td><div class="wrap"><?php echo $leads->leadperiod;?></div></td>					
+                    <td>
+					<?php
+					$lead_id=$leads->lead_id;
+					  $nextaction=$this->leadModel->getnextAction($lead_id);
+					  $nextactiondate =$this->leadModel->getnextActiondate($lead_id);
+					  $nextaction1=$nextaction."  "."  ".'Action Date:'.$nextactiondate;
+					?>
+					<div class="wrap"><a href="#" style="color: black; text-decoration: none;" data-toggle="tooltip" title="<?php echo $nextaction1;?>"><?php echo $nextaction;?></a></div>
+					</td>	
+					<td><div class="wrap"><?php echo$leads->assignee;?></div></td>				
+						<?php  
+							date_default_timezone_set("Asia/Kolkata");
+							$date1=date("Y-m-d");              
+							if($leads->closuredate < $date1)
+                                { 
+                        ?>      
+					<td style="background:red; color:white"><?php echo $leads->closuredate; ?></div></td>   
+                        <?php
+							} 
+							else{
+						?>
+					<td><?php echo $leads->closuredate ?></div></td>   
+						<?php
+							}
+                        ?>                        
                     <td style="text-align:center;">
 						<a href="<?php echo URLROOT;?>/leads/onlineleadedit/<?php echo $leads->id;?>" class="icon4 fa fa-pencil-square-o fa-1x size1" data-toggle="tooltip" title data-original-title="Edit"></a>
-						
 						<a href="<?php echo URLROOT;?>/leads/leadupdate/<?php echo $leads->id;?>" class="icon3 fa fa-undo fa-1x size1" data-toggle="tooltip" title data-original-title="Update"></a>
-
-						<a href="<?php echo URLROOT;?>/leads/leadupdatelist/<?php echo $leads->lead_id;?>" class="icon5 fa fa-bar-chart fa-1x size1" data-toggle="tooltip" title data-original-title="View Updates"></a>
-						
-						
+						<a href="<?php echo URLROOT;?>/leads/leadupdatelist/<?php echo $leads->lead_id;?>" class="icon5 fa fa-bar-chart fa-1x size1" data-toggle="tooltip" title data-original-title="View Updates"></a>												
 						<a href="<?php echo URLROOT;?>/Meeting/sendIcalEvent/<?php echo $leads->id;?>" class="mdi mdi-account-switch size1" data-toggle="tooltip" title data-original-title="Schedule Meeting"></a>
-
 						<a href="<?php echo URLROOT;?>/Mom/mom_master/<?php echo $leads->id;?>" class="mdi mdi-gmail size1" data-toggle="tooltip" title data-original-title="Update MOM"></a>
-
 						<a href="<?php echo URLROOT;?>/Quatations/quatation_master/<?php echo $leads->id;?>" class="mdi mdi-file-document-box size1" data-toggle="tooltip" title data-original-title="Send Quatation"></a>
 					</td>
-					
-					
-                 </tr> 
-				 <?php endforeach;?>
-			  </tbody>
-          </table>
-		 <br>
-<hr>
-
-<br>
-		  <table class="table table-hover dataTable table-striped" id="example2" >
+					<?php endforeach;?>
+				</tr> 
+			</tbody>
+				
+				
+					<tr style=" font-weight: bold; background-color: #4CAF50; color: white;"><td></td> <td></td>
+						<td> Total</td> 
+                        <td> <?php echo $data['leadtotal'];?></td>
+						<td></td><td></td><td></td><td><td></td></td> 
+					</tr>
+        </table>
+			<br><hr><br>
+		  <table class="table table-hover dataTable table-striped display" id="" >
                   <thead>
 				 <tr style="background-color:#009688; color:white;">
 						<td></td> <td></td>
                                        <td> </td> 	<td style="text-align: center;">Cold</td><td></td> <td></td>
-                                       <td> </td> <td> </td> 
+                                       <td> </td> <td> <td></td></td> 
 						</tr>
                     <tr>
                           <th>Lead Id</th>  
 						  <th>Company Name</th>  
 						  <th>Product</th>                  
-                          <th>Value</th>
-						
-						  <th>Lead Status</th>
+                          <th>Value</th>						
+						  <th>Lead Period</th>
+						  <th>Next action</th>
 						  <th>Assignee</th>	
 						    <th>Closure Date</th>   
                           <th>Actions</th>	
@@ -297,7 +326,16 @@ table.dataTable td {
 					<td><div class="wrap"><?php echo $leads->company;?></div></td> 
                     <td><div class="wrap"><?php echo $leads->product;?></div></td>            
                     <td><div class="wrap"><?php echo $leads->ordervalue;?></div></td>             
-                    <td><div class="wrap"><?php echo $leads->leadstatus;?></div></td>	
+                    <td><div class="wrap"><?php echo $leads->leadperiod;?></div></td>					
+                    <td>
+					<?php
+					$lead_id=$leads->lead_id;
+					  $nextaction=$this->leadModel->getnextAction($lead_id);
+					  $nextactiondate =$this->leadModel->getnextActiondate($lead_id);
+					  $nextaction1=$nextaction."  "."  ".'Action Date:'.$nextactiondate;
+					?>
+					<div class="wrap"><a href="#" style="color: black; text-decoration: none;" data-toggle="tooltip" title="<?php echo $nextaction1;?>"><?php echo $nextaction;?></a></div>
+					</td>		
                      <td><div class="wrap"><?php echo$leads->assignee;?></div></td>				
 				          <?php  
 				               date_default_timezone_set("Asia/Kolkata");
@@ -335,7 +373,13 @@ table.dataTable td {
 					
                  </tr> 
 				 <?php endforeach;?>
+				  
+				 
 			  </tbody>
+			   <tr style=" font-weight: bold; background-color: #4CAF50; color: white;"><td></td> <td></td>
+                                       <td> Total</td> 
+                                     <td> <?php echo $data['coldtotal'];?></td>
+                                     <td></td><td></td><td></td><td></td><td></td> </tr>
           </table>
 		  
 
@@ -345,42 +389,26 @@ table.dataTable td {
 	</div>
 	
   </div>  
-  <script>
-$(document).ready( function() {
-    $('#example').dataTable({
-		    responsive: true,
-        /* Disable initial sort */
-        "aaSorting": []
-    });
-})
+ <script>
+$(document).ready(function() {
+    $('table.display').DataTable();
+} );
  </script> 
  <script>
-$(document).ready( function() {
-    $('#example1').dataTable({
-		    responsive: true,
-        /* Disable initial sort */
-        "aaSorting": []
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
-})
- </script> 
+  });
+});
+</script>
  <script>
-$(document).ready( function() {
-    $('#example2').dataTable({
-        responsive: true,
-        /* Disable initial sort */
-        "aaSorting": []
-    });
-})
- </script> 
- <script>
-$(document).ready( function() {
-    $('#example3').dataTable({
-        responsive: true,
-        /* Disable initial sort */
-        "aaSorting": []
-    });
-})
- </script> 
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
  <style>
  
 table td > .wrap {

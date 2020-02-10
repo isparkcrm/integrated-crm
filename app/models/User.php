@@ -381,7 +381,7 @@ public function selectUser($user_id){
       }
 //-------------------------------------------------------------------------------------------------------------
       public function campaignopen($i){
-        $status ="close";
+        $status ="Close";
       $this->db->query('SELECT COUNT(status) AS total FROM tickets WHERE campaign_ID=:id AND status!=:status');
        $this->db->bind(':id', $i);
           $this->db->bind(':status', $status);
@@ -392,7 +392,7 @@ public function selectUser($user_id){
       }
 //-------------------------------------------------------------------------------------------------------------
        public function campaignclose($i){
-        $status ="close";
+        $status ="Close";
       $this->db->query('SELECT COUNT(status) AS total FROM closedtickets WHERE campaign_ID=:id AND status=:status');
        $this->db->bind(':id', $i);
           $this->db->bind(':status', $status);
@@ -403,7 +403,7 @@ public function selectUser($user_id){
       }
 //-------------------------------------------------------------------------------------------------------------
        public function campaignopentoday($i){
-        $status ="close";
+        $status ="Close";
       $this->db->query('SELECT COUNT(status) AS total FROM tickets WHERE campaign_ID=:id AND status!=:status  AND  DAY(created_at) = DAY(NOW())');
        $this->db->bind(':id', $i);
           $this->db->bind(':status', $status);
@@ -414,7 +414,7 @@ public function selectUser($user_id){
       }
 //-------------------------------------------------------------------------------------------------------------
        public function campaignclosetoday($i){
-        $status ="close";
+        $status ="Close";
       $this->db->query('SELECT COUNT(status) AS total FROM closedtickets WHERE campaign_ID=:id AND status=:status  AND  DAY(closed_at) = DAY(NOW())');
        $this->db->bind(':id', $i);
           $this->db->bind(':status', $status);
@@ -425,7 +425,7 @@ public function selectUser($user_id){
       }
 //-------------------------------------------------------------------------------------------------------------  
        public function campaigncritical($i){
-        $status ="close";
+        $status ="Close";
         $severity="P1";
       $this->db->query('SELECT COUNT(severity) AS total FROM tickets WHERE campaign_ID=:id AND status!=:status AND severity=:severity');
        $this->db->bind(':id', $i);
@@ -439,7 +439,7 @@ public function selectUser($user_id){
       }
 //------------------------------------------------------------------------------------------------------------- 
        public function campaignhigh($i){
-        $status ="close";
+        $status ="Close";
         $severity="P2";
       $this->db->query('SELECT COUNT(severity) AS total FROM tickets WHERE campaign_ID=:id AND status!=:status AND severity=:severity');
        $this->db->bind(':id', $i);
@@ -452,7 +452,7 @@ public function selectUser($user_id){
       }
 //-------------------------------------------------------------------------------------------------------------
      public function campaignmedium($i){
-        $status ="close";
+        $status ="Close";
         $severity="P3";
       $this->db->query('SELECT COUNT(severity) AS total FROM tickets WHERE campaign_ID=:id AND status!=:status AND severity=:severity');
        $this->db->bind(':id', $i);
@@ -465,7 +465,7 @@ public function selectUser($user_id){
       }
 //-------------------------------------------------------------------------------------------------------------
        public function campaignlow($i){
-        $status ="close";
+        $status ="Close";
         $severity="P4";
       $this->db->query('SELECT COUNT(severity) AS total FROM tickets WHERE campaign_ID=:id AND status!=:status AND severity=:severity');
        $this->db->bind(':id', $i);

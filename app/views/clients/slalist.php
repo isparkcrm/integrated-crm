@@ -78,10 +78,13 @@
   </div>  
 <?php require APPROOT . '/views/inc/footer.php'; ?>
     <script>
- $(document).ready(function() {
- $('#example').DataTable();
-});
- </script>             
+$(document).ready( function() {
+    $('#example').dataTable({
+        /* Disable initial sort */
+        "aaSorting": []
+    });
+})
+ </script>           
                          
          
         </div>

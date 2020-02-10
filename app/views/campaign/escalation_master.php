@@ -265,7 +265,14 @@
 }).trigger("change"); 
       
 	  </script> -->
-
+<script>
+$(document).ready( function() {
+    $('#example').dataTable({
+        /* Disable initial sort */
+        "aaSorting": []
+    });
+})
+ </script>
 <script>
   // To ensure only valid mobile numbers(7000000000 to 9999999999) are entered
   $('body').on('keyup', '.js-input-mobile', function () {

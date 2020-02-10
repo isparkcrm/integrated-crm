@@ -353,7 +353,7 @@ public function assign($ticketID){
 //-------------------------------------------------------------------------------------------------------------   
 public function email_comm($ticketID){        
          
-         
+   $this->departmentModel->updateemailreadstatus($ticketID);           
   $tickets = $this->ticketModel->EmailStatus($ticketID);
 
   // Check for owner
@@ -519,6 +519,52 @@ else  if(empty($data['campaign']) ){
    
     
   }
+  //-----------------------------------------------------------------------------------------------------
+  public function userwise_report(){
+
+  // Check for owner
+    
+  
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      // Sanitize POST array
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+      $data =[
+          'from' => trim($_POST['from_date']), 
+          'to' => trim($_POST['to_date']),    
+         'username'=> trim($_POST['username']),     
+        ];
+         
+  if(empty($data['username']) ){
+            
+    $this->view('tickets/userwise_report1', $data);
+  }
+
+else {
+          
+    
+    $this->view('tickets/userwise_report2', $data);
+}
+
+     
+      }
+      else {
+        $status='Close';
+    $tickets = $this->ticketModel->getcloseTickets($status);
+    // Check for owner
+    $data = [
+    'tickets' => $tickets
+    ];
+    
+    $this->view('tickets/userwise_report', $data);
+  
+      }
+  
+    // Get existing post from model
+   
+    
+  }
+  
   
   //------------------------------------------------------------------------------------------------------
 

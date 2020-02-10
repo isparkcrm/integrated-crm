@@ -82,8 +82,8 @@
 						<div class="form-group row">
                           <label class="col-sm-3 col-form-label">Customer Type<sup style="color:red;font-size:16px;">*</sup></label>
                           <div class="col-sm-9">
-						    <select class="form-control" name="customertype">
-							<option selected="selected" disabled="disabled">--Select--</option>
+						    <select class="form-control" name="customertype" required="required">
+							<option selected="selected" disabled="disabled"></option>
 							<option value="Existing">Existing</option>
 							<option value="New">New</option>
 							</select>
@@ -91,37 +91,38 @@
 						  </div>
                         </div>
 						</div>	
-						<div class="col-md-6">
+						
+                            <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Customer Name</label>
+                          <label class="col-sm-3 col-form-label">Company Name<sup style="color:red;font-size:16px;">*</sup></label>
                           <div class="col-sm-9">
-                          <input type="text" name="customername" class="form-control"  placeholder="First Name">
-                          <span class="alert-danger"> <?php echo $data['customername_err']; ?> </span>   
-                        </div>
-                      </div>
-                    </div>						
-						</div>						
-                    <div class="row">
-						<div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Company<sup style="color:red;font-size:16px;">*</sup></label>
-                          <div class="col-sm-9">
-                          <input type="text" name="company" class='form-control' placeholder="Please Enter Company Name"/>
+                          <input type="text" name="company" class='form-control' placeholder="Please Enter Company Name" required="required"/>
                             <span ><?php echo $data['company_err']; ?>  </span>       
                         </div>
                       </div>
+                      </div>					
+					</div>						
+                    <div class="row">
+						<div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Contact Person<sup style="color:red;font-size:16px;">*</sup></label>
+                          <div class="col-sm-9">
+                          <input type="text" name="customername" class="form-control"  placeholder="First Name" required="required">
+                          <span class="alert-danger"> <?php echo $data['customername_err']; ?> </span>   
+                        </div>
                       </div>
+                    </div>	
 					  		 <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Industry</label>
+                          <label class="col-sm-3 col-form-label">Industry<sup style="color:red;font-size:16px;">*</sup></label>
                           <div class="col-sm-9">
-							  <select class="form-control" id='industry' name="industry">
-							  <option value="--Select--" selected="selected" disabled>--Select--</option>
+							  <select class="form-control" id='industry' name="industry" required="required">
+							  <option value="--Select--" selected="selected" disabled></option>
 							  <?php foreach($data['industry'] as $indus):?>
 							  <option value="<?php echo $indus->id;?>" ><?php echo $indus->indus_name;?></option>
 							  <?php endforeach;?>
 							  </select>
-								<span ><?php echo $data['industy_err']; ?>  </span>       
+								<span class="alert-danger"><?php echo $data['industy_err']; ?>  </span>       
 						  </div>
                         </div>
                       </div>			  
@@ -130,10 +131,10 @@
                      
 					 <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Lead Source</label>
+                          <label class="col-sm-3 col-form-label">Lead Source<sup style="color:red;font-size:16px;">*</sup></label>
                           <div class="col-sm-9">
-                          <select class="form-control" id="leadsource" name="leadsource">
-						  <option value="--Select--" selected="selected" disabled>--Select--</option>
+                          <select class="form-control" id="leadsource" name="leadsource" required="required">
+						  <option value="--Select--" selected="selected" disabled></option>
 						  <option value="Advertisement" >Advertisement</option>
 						  <option value="Customer Event" >Customer Event</option>
 						  <option value="Employee Referral" >Employee Referral</option>
@@ -145,7 +146,7 @@
 						  <option value="Webniar">Webniar</option>
 						  <option value="Website">Website</option>						  
 						  </select>
-                            <span ><?php echo $data['leadsource_err']; ?>  </span>       
+                            <span class="alert-danger"><?php echo $data['leadsource_err']; ?>  </span>       
                         </div>
                       </div>
                       </div> 
@@ -157,9 +158,9 @@
 						</div>
 						</div>-->
 						<div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Phone</label>
+                          <label class="col-sm-3 col-form-label">Phone<sup style="color:red;font-size:16px;">*</sup></label>
                           <div class="col-sm-9">
-                          <input type="number"  class='form-control' name='phone' placeholder="Please Enter Landline Number"/>                     
+                          <input type="number"  class='form-control' name='phone' placeholder="Please Enter Landline Number" required="required"/>                     
                           <span class="alert-danger"> <?php echo $data['phone_err']; ?> </span>                                                  
                           </div>
                         </div>
@@ -185,11 +186,11 @@
 					  <div class="row phone-list">
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Mobile</label>
+                          <label class="col-sm-3 col-form-label">Mobile<sup style="color:red;font-size:16px;">*</sup></label>
                           <div class="col-sm-9">
                          	<div class="">
 								<div class="input-group">
-									<input type="number" name="mobile[]" id="mobile" class="form-control" placeholder="999 999 9999" />
+									<input type="number" name="mobile[]" id="mobile" class="form-control" placeholder="999 999 9999"  required="required"/>
 								</div>
 							</div>
 							<span class="alert-danger"> <?php echo $data['mobile_err']; ?> </span>
@@ -198,9 +199,9 @@
                       </div>  
 					  <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Email</label>
+                          <label class="col-sm-3 col-form-label">Email<sup style="color:red;font-size:16px;">*</sup></label>
                           <div class="col-sm-9">
-                          <input type="email" id="email"  class='form-control' name='email[]' placeholder="Email">                     
+                          <input type="email" id="email"  class='form-control' name='email[]' placeholder="Email" required="required">                     
                           <span class="alert-danger"> <?php echo $data['email_err']; ?> </span>     </div>
                         </div>
                       </div>  
@@ -210,10 +211,10 @@
 					  <div class="row">
 					  <div class="col-md-6">
 					<div class="form-group row">
-                     <label class="col-sm-3 col-form-label">Vertical</label>	
+                     <label class="col-sm-3 col-form-label">Vertical<sup style="color:red;font-size:16px;">*</sup></label>	
 					<div class="col-md-9">					 
-					  <select name="vertical" id="vertical" class="form-control">
-					  <option value="--Select--" disabled="disabled" selected="selected">--Select--</option>
+					  <select name="vertical" id="vertical" class="form-control" required="required">
+					  <option value="--Select--" disabled="disabled" selected="selected"></option>
 					    <?php foreach($data['vertical'] as $verticals):?>
 					  <option value="<?php echo $verticals->id ?>"><?php echo $verticals->verticalname; ?></option>
 					    <?php endforeach;?>
@@ -223,10 +224,10 @@
 					  </div>
 					  <div class="col-md-6">
 					  <div class="form-group row">
-                     <label class="col-sm-3 col-form-label">OEM</label>	
+                     <label class="col-sm-3 col-form-label">OEM<sup style="color:red;font-size:16px;">*</sup></label>	
 					<div class="col-md-9">					 
-					  <select id="oem" name="oem" class="form-control">
-					  <option value="--Select--" disabled="disabled" selected="selected">--Select--</option>
+					  <select id="oem" name="oem" class="form-control" required="required">
+					  <option value="--Select--" disabled="disabled" selected="selected"></option>
 					    <?php foreach($data['oemmaster'] as $oem):?>
 					  <option value="<?php echo $oem->id ?>"><?php echo $oem->oemname; ?></option>
 					    <?php endforeach;?>
@@ -239,18 +240,18 @@
 					  <div class="row">
 					  <div class="col-md-6">
 					  <div class="form-group row">
-					  <label class="col-sm-3 col-form-label">Product</label>
+					  <label class="col-sm-3 col-form-label">Product<sup style="color:red;font-size:16px;">*</sup></label>
 					  <div class="col-md-9">
-					  <input type="text" name="product" class="form-control" placeholder="Please Enter Product"/>
+					  <input type="text" name="product" class="form-control" placeholder="Please Enter Product"required="required"/>
 					  <span class="alert-danger"><?php echo $data['product_err'];?></span>  </div>
 					  </div>
 					  </div>
 					  <div class="col-md-6">
 					  <div class="form-group row"> 
-						<label class="col-sm-3 col-form-label">Lead Status</label>
+						<label class="col-sm-3 col-form-label">Lead Status<sup style="color:red;font-size:16px;">*</sup></label>
 						<div class="col-sm-9">
-						<select name="leadstatus" class="form-control">
-						<option value="--None--" selected="selected" disabled>--None--</option>
+						<select name="leadstatus" class="form-control" required="required">
+						<option value="--None--" selected="selected" disabled></option>
 						<option value="Cold">Cold</option>
 						<option value="Lead">Lead</option>
 						<option value="Upside">Upside</option>
@@ -266,10 +267,10 @@
 				<div class="row">
 					  <div class="col-md-6">
 					<div class="form-group row">
-                     <label class="col-sm-3 col-form-label">Assignee</label>	
+                     <label class="col-sm-3 col-form-label">Assignee<sup style="color:red;font-size:16px;">*</sup></label>	
 					<div class="col-md-9">					 
-					  <select name="assignee" class="form-control">
-					  <option value="--Select--" disabled="disabled" selected="selected">--Select--</option>
+					  <select name="assignee" class="form-control" required="required">
+					  <option value="--Select--" disabled="disabled" selected="selected"></option>
 					    <?php foreach($data['assignee'] as $assign):?>
 					  <option value="<?php echo $assign->email ?>"><?php echo $assign->username; ?></option>
 					    <?php endforeach;?>
@@ -279,14 +280,29 @@
 					  </div>
 					  <div class="col-md-6">
 					  <div class="form-group row">
-                     <label class="col-sm-3 col-form-label">Order Value</label>	
+                     <label class="col-sm-3 col-form-label">Order Value<sup style="color:red;font-size:16px;">*</sup></label>	
 					<div class="col-md-9">					 
-					 <input type="text" name="ordervalue" class="form-control" placeholder="Please Enter Order value"/>
+					 <input type="text" name="ordervalue" class="form-control" placeholder="Please Enter Order value" required="required"/>
 					<span class="alert-danger"><?php echo $data['ordervalue_err'];?></span></div>
 					</div>
 					  </div>
 					  </div>
 					   <div class="row">
+					    <div class="col-md-6">
+					  <div class="form-group row"> 
+						<label class="col-sm-3 col-form-label">Lead Period<sup style="color:red;font-size:16px;">*</sup></label>
+						<div class="col-sm-9">
+						<select name="period" class="form-control" required="required">
+						<option value="--None--" selected="selected" disabled></option>
+						<option value="Onetime">Onetime</option>
+						<option value="Monthly">Monthly</option>
+						<option value="Annual">Annual</option>
+						
+						</select>
+						 <span ><?php echo $data['leadperiod_err']; ?>  </span> 
+						</div>
+					  </div>
+					</div>
 					    <div class="col-md-6">
 					<div class="form-group row">
                      <label class="col-sm-3 col-form-label">Closure Date</label>	

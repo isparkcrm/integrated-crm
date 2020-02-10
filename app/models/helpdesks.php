@@ -224,11 +224,7 @@ public function TicketUpdate($data,$campaign_email,$campaign_number){
   $email_msg=$customer[0]->email_message1;
   $sms_msg=$customer[0]->sms_message1; 
   
-  date_default_timezone_set('Asia/Kolkata');
-  $m = date('h');
-  $y = date('i');
-  $d = date('s');
-  $tid = $y.$m.$d;   
+
    if($data['notification']=="yes"){
   if($cust=='email'){
     $output=$email_msg1;

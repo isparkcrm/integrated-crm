@@ -5,6 +5,8 @@
  
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/datatables/dataTables.bootstrap.css"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"> 
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"> 
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo URLROOT; ?>/public/datatables/jquery.dataTables.min.js"></script>
       <!-- partial -->
@@ -94,7 +96,13 @@
                     <a href="<?php echo URLROOT; ?>/helpdesk/<?php echo $tickets->ticketID; ?>"> <i class="menu-icon mdi mdi-elevation-rise" data-toggle="tooltip" title="View Update"> </i></a> -->
                     <a href="<?php echo $url; ?>" target="_blank"> <i class="menu-icon mdi mdi-phone" data-toggle="tooltip" title="Call"> </i></a>
                     <a href="<?php echo URLROOT; ?>/helpdesk/sendmail/<?php echo $tickets->ticketID; ?>"> <i class="menu-icon mdi mdi-message-reply-text" data-toggle="tooltip" title="Send Email"> </i></a>
-                    <a href="<?php echo URLROOT; ?>/tickets/email_comm/<?php echo $tickets->ticketID; ?>"> <i class="menu-icon mdi mdi-email-open-outline" data-toggle="tooltip" title="View Email"> </i></a>
+                     <a href="<?php echo URLROOT; ?>/tickets/email_comm/<?php echo $tickets->ticketID; ?>"> <i class="menu-icon count-indicator mdi mdi-email-open-outline" data-toggle="tooltip" title="View Email"><?php
+						$ticketid = $tickets->ticketID;
+						$EmailCount  = $this->departmentModel->getunreadEmails($ticketid);
+						
+						?>
+						<sup style="color:red"><?php echo $EmailCount; ?></sup> </i>
+						</a>
                    </td>
                      
                    </tr> 
@@ -120,9 +128,12 @@
       </div>
       <!-- main-panel ends -->
       <script>
- $(document).ready(function() {
- $('#example').DataTable();
-});
+$(document).ready( function() {
+    $('#example').dataTable({
+        /* Disable initial sort */
+        "aaSorting": []
+    });
+})
  </script>
 
 <style type="text/css"> .menu-icon {

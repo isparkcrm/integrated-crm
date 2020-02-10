@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION['id'])){
+  redirect('users/index_new');
+}
+?>
 <div class="container-scroller">
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
@@ -171,19 +176,19 @@
 				   <li class="nav-item">
 					<a class="nav-link" href="<?php echo URLROOT; ?>/leads/salesleadlist">
 					  <i class="menu-icon mdi mdi-account-check"></i>             
-					  <span class="menu-title">ASSIGNED CUSTOMER</span>
+					  <span class="menu-title">Assigned Customer</span>
 					</a>
 				   </li> 
 					<li class="nav-item">
 					<a class="nav-link" href="<?php echo URLROOT; ?>/Leads/salesleadlist_new">
 				  <i class="menu-icon mdi mdi-account-plus"></i>             
-				  <span class="menu-title"> VIEW LEADS </span>
+				  <span class="menu-title"> View Leads </span>
 				</a>
 					</li> 
 			  <li class="nav-item">
 				<a class="nav-link" href="<?php echo URLROOT; ?>/Leads/leadstatus">
 				  <i class="menu-icon mdi mdi-account-plus"></i>             
-				  <span class="menu-title">MANAGE LEADS</span>
+				  <span class="menu-title">Manage Leads</span>
 				</a>
 			  </li> 
 			  <!--
@@ -212,7 +217,7 @@
           <li class="nav-item">
           <a class="nav-link" href="<?php echo URLROOT; ?>/leads/paymentlist">
             <i class="menu-icon mdi mdi-account-check"></i>             
-            <span class="menu-title">PAYMENT STATUS</span>
+            <span class="menu-title">Payment Status</span>
           </a>
            </li> 
             <li class="nav-item">
@@ -538,7 +543,7 @@
               <span class="menu-title"> Outbound Calls</span>
             </a>
           </li>   -->
-          	<li class="nav-item">
+          		<li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#auth1" aria-expanded="false" aria-controls="auth">
              <i class="menu-icon mdi mdi-settings"></i>
               <span class="menu-title">Reports</span>
@@ -556,7 +561,13 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/posts/reports_close">
               <i class="menu-icon mdi mdi-receipt"></i>             
-              <span class="menu-title"> Close Tickets</span>
+              <span class="menu-title"> Closed Tickets</span>
+            </a>
+          </li> 
+           <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/tickets/userwise_report">
+              <i class="menu-icon mdi mdi-receipt"></i>             
+              <span class="menu-title"> Userwise Report</span>
             </a>
           </li> 
               </ul>
