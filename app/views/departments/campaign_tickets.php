@@ -107,13 +107,13 @@
                     <a href="<?php echo URLROOT; ?>/departments/status/<?php echo $tickets->ticketID; ?>"> <i class="menu-icon mdi mdi-elevation-rise" data-toggle="tooltip" title="View Update"> </i></a> -->
                     <a href="<?php echo $url; ?>" target="_blank"> <i class="menu-icon mdi mdi-phone" data-toggle="tooltip" title="Call"> </i></a>
                     <a href="<?php echo URLROOT; ?>/departments/sendmail/<?php echo $tickets->ticketID; ?>"> <i class="menu-icon mdi mdi-message-reply-text" data-toggle="tooltip" title="Send Email"> </i></a>
-                   <a href="<?php echo URLROOT; ?>/tickets/email_comm/<?php echo $tickets->ticketID; ?>"> <i class="menu-icon count-indicator mdi mdi-email-open-outline" data-toggle="tooltip" title="View Email"> </i>
-						<?php
+                  <a href="<?php echo URLROOT; ?>/tickets/email_comm/<?php echo $tickets->ticketID; ?>"> <i class="menu-icon count-indicator mdi mdi-email-open-outline" data-toggle="tooltip" title="View Email"><?php
 						$ticketid = $tickets->ticketID;
 						$EmailCount  = $this->departmentModel->getunreadEmails($ticketid);
 						
 						?>
-						<span class="count"><?php echo $EmailCount; ?></span></a>
+						<sup style="color:red"><?php echo $EmailCount; ?></sup> </i>
+						</a>
                       
                    </td>
 				   </tr>
@@ -141,13 +141,13 @@
 						<a href="<?php echo URLROOT; ?>/departments/status/<?php echo $tickets->ticketID; ?>"> <i class="menu-icon mdi mdi-elevation-rise" data-toggle="tooltip" title="View Update"> </i></a> -->
 						<a href="<?php echo $url; ?>" target="_blank"> <i class="menu-icon mdi mdi-phone" data-toggle="tooltip" title="Call"> </i></a>
 						<a href="<?php echo URLROOT; ?>/departments/sendmail/<?php echo $tickets->ticketID; ?>"> <i class="menu-icon mdi mdi-message-reply-text" data-toggle="tooltip" title="Send Email"> </i></a>
-						<a href="<?php echo URLROOT; ?>/tickets/email_comm/<?php echo $tickets->ticketID; ?>"> <i class="menu-icon count-indicator mdi mdi-email-open-outline" data-toggle="tooltip" title="View Email"> </i>
-						<?php
+						<a href="<?php echo URLROOT; ?>/tickets/email_comm/<?php echo $tickets->ticketID; ?>"> <i class="menu-icon count-indicator mdi mdi-email-open-outline" data-toggle="tooltip" title="View Email"><?php
 						$ticketid = $tickets->ticketID;
 						$EmailCount  = $this->departmentModel->getunreadEmails($ticketid);
 						
 						?>
-						<span class="count"><?php echo $EmailCount; ?></span></a>
+						<sup style="color:red"><?php echo $EmailCount; ?></sup> </i>
+						</a>
                    </td>
 <?php }?>				   
                    </tr>        

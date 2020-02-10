@@ -63,7 +63,7 @@ $(document).ready(function() {
                     <div class="float-right">
                       <p class="mb-0 text-right">Critical</p>
                       <div class="fluid-container">                                              
-                         <a href="" style="color: black; text-decoration: none;">
+                         <a href="<?php echo URLROOT; ?>/departments/reports" style="color: black; text-decoration: none;">
                         <h3 class="font-weight-medium text-right mb-0"><?php echo $data['critical'];?></h3> </a>                      
                       </div>
                     </div>
@@ -91,7 +91,7 @@ $(document).ready(function() {
                     <div class="float-right">
                       <p class="mb-0 text-right">High</p>
                       <div class="fluid-container">                         
-              <a href="" style="color: black; text-decoration: none;">
+             <a href="<?php echo URLROOT; ?>/departments/reports" style="color: black; text-decoration: none;">
                         <h3 class="font-weight-medium text-right mb-0"><?php echo $data['high'];?></h3> </a>
                       </div>
                     </div>
@@ -120,7 +120,7 @@ $(document).ready(function() {
                       <p class="mb-0 text-right">Medium</p>
                       <div class="fluid-container">   
                          
-               <a href="low.php" style="color: black; text-decoration: none;">
+               <a href="<?php echo URLROOT; ?>/departments/reports" style="color: black; text-decoration: none;">
                         <h3 class="font-weight-medium text-right mb-0"><?php echo $data['medium'];?></h3> </a>
                       </div>
                     </div>
@@ -149,7 +149,7 @@ $(document).ready(function() {
                       <p class="mb-0 text-right">Low</p>
                       <div class="fluid-container"> 
                          
-              <a href="customers.php" style="color: black; text-decoration: none;">
+              <a href="<?php echo URLROOT; ?>/departments/reports" style="color: black; text-decoration: none;">
                         <h3 class="font-weight-medium text-right mb-0"><?php echo $data['low'];?></h3> </a>
                       </div>
                     </div>
@@ -226,27 +226,33 @@ $(document).ready(function() {
 								</td>
 
 								<td style="text-align: center;">
+								<a href="<?php echo URLROOT; ?>/departments/reports" style="color: black; text-decoration: none;">
 									<?php
 										$open=$this->userModel->campaignopen($data['campaign']);
 										echo $open;            
-									?>             
+									?> 
+                                 </a>									
 								</td>
 
 								<td style="text-align: center;"> 
+								<a href="<?php echo URLROOT; ?>/departments/reports_close" style="color: black; text-decoration: none;">
 									<?php
 										$close=$this->userModel->campaignclose($data['campaign']);
 										echo $close;                      
 									?> 
+									</a>
 								</td>
 								<td style="text-align: center;">
+								<a href="<?php echo URLROOT; ?>/departments/reports" style="color: black; text-decoration: none;">
 									<?php 
 										$opentoday=$this->userModel->campaignopentoday($data['campaign']);
 										echo $opentoday;              
 									?> 
+									</a>
 							</td>
 
                           <td style="text-align: center;">
-						  
+						  <a href="<?php echo URLROOT; ?>/departments/reports_close" style="color: black; text-decoration: none;">
                            <?php 
 						     $closetoday=$this->userModel->campaignclosetoday($data['campaign']);
                       
@@ -254,27 +260,33 @@ $(document).ready(function() {
 							
 				            
               ?>
+			  </a>
                           </td>
 
 
                           <td  style="text-align: center;">
+						  <a href="<?php echo URLROOT; ?>/departments/reports" style="color: black; text-decoration: none;">
                               <?php 
 									  $critical=$this->userModel->campaigncritical($data['campaign']);
                       
 							echo $critical;
 					
               ?> 
+			  </a>
                           </td>
 						   <td  style="text-align: center;">
+						   <a href="<?php echo URLROOT; ?>/departments/reports" style="color: black; text-decoration: none;">
                               <?php 
 									  $high=$this->userModel->campaignhigh($data['campaign']);
                       
 							echo $high;
 						
               ?> 
+			  </a>
                           </td>
 
                           <td style="text-align: center;">
+						  <a href="<?php echo URLROOT; ?>/departments/reports" style="color: black; text-decoration: none;">
                            <?php 
 									  $medium=$this->userModel->campaignmedium($data['campaign']);
                       
@@ -284,23 +296,28 @@ $(document).ready(function() {
              
                          
               ?>
-                          </td>
+                   
+</a>				   </td>
 
                           <td style="text-align: center;">
+						  <a href="<?php echo URLROOT; ?>/departments/reports" style="color: black; text-decoration: none;">
                         <?php 
 								$low=$this->userModel->campaignlow($data['campaign']);
                       
 							echo $low;
 				           
               ?> 
+			  </a>
                          </td>    
 						    <td style="text-align: center;">
+							<a href="<?php echo URLROOT; ?>/departments/reports" style="color: black; text-decoration: none;">
                         <?php
 							$sla=$this->userModel->campaignsla($data['campaign']);
                       
 							echo $sla;
 				           
               ?> 
+			  </a>
                          </td> 
 
                          

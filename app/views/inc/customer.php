@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION['id'])){
+  redirect('users/index_new');
+}
+?>
 <div class="container-scroller">
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">

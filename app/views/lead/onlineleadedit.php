@@ -357,6 +357,21 @@
 					  </div>
 					  </div>
 					   <div class="row">
+					     <div class="col-md-6">
+					  <div class="form-group row"> 
+						<label class="col-sm-3 col-form-label">Lead Period<sup style="color:red;font-size:16px;">*</sup></label>
+						<div class="col-sm-9">
+						<select name="period" class="form-control" required="required">
+						<option value="<?php echo $data['period'];?>" selected="selected"><?php echo $data['period'];?></option>
+						<option value="Onetime">Onetime</option>
+						<option value="Monthly">Monthly</option>
+						<option value="Annual">Annual</option>
+						
+						</select>
+						
+						</div>
+					  </div>
+					</div>
 					    <div class="col-md-6">
 					<div class="form-group row">
                      <label class="col-sm-3 col-form-label">Closure Date</label>	

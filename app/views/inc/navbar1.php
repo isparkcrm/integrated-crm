@@ -1,3 +1,19 @@
+<?php
+
+if(!isset($_SESSION['id'])){
+  redirect('users/index_new');
+}
+$inactive = 600;
+// check to see if $_SESSION['timeout'] is set
+if(isset($_SESSION['timeout']) ) {
+	$session_life = time() - $_SESSION['timeout'];
+	if($session_life > $inactive)
+        { session_destroy();
+	
+	redirect('users/SetFlag'); }
+}
+$_SESSION['timeout'] = time();
+?>
 <div class="container-scroller">
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
@@ -112,19 +128,19 @@
 				   <li class="nav-item">
 					<a class="nav-link" href="<?php echo URLROOT; ?>/leads/salesleadlist">
 					  <i class="menu-icon mdi mdi-account-check"></i>             
-					  <span class="menu-title">ASSIGNED CUSTOMER</span>
+					  <span class="menu-title">Assigned Customer</span>
 					</a>
 				   </li> 
 					<li class="nav-item">
 					<a class="nav-link" href="<?php echo URLROOT; ?>/Leads/salesleadlist_new">
 				  <i class="menu-icon mdi mdi-account-plus"></i>             
-				  <span class="menu-title"> VIEW LEADS </span>
+				  <span class="menu-title"> View Leads </span>
 				</a>
 					</li> 
 			  <li class="nav-item">
 				<a class="nav-link" href="<?php echo URLROOT; ?>/Leads/leadstatus">
 				  <i class="menu-icon mdi mdi-account-plus"></i>             
-				  <span class="menu-title">MANAGE LEADS</span>
+				  <span class="menu-title">Manage Leads</span>
 				</a>
 			  </li> 
 			  <!--
@@ -181,19 +197,19 @@
 				   <li class="nav-item">
 					<a class="nav-link" href="<?php echo URLROOT; ?>/leads/salesleadlist">
 					  <i class="menu-icon mdi mdi-account-check"></i>             
-					  <span class="menu-title">ASSIGNED CUSTOMER</span>
+					  <span class="menu-title">Assigned Customer</span>
 					</a>
 				   </li> 
 					<li class="nav-item">
 					<a class="nav-link" href="<?php echo URLROOT; ?>/Leads/salesleadlist_new">
 				  <i class="menu-icon mdi mdi-account-plus"></i>             
-				  <span class="menu-title"> VIEW LEADS </span>
+				  <span class="menu-title"> View Leads </span>
 				</a>
 					</li> 
 			  <li class="nav-item">
 				<a class="nav-link" href="<?php echo URLROOT; ?>/Leads/leadstatus">
 				  <i class="menu-icon mdi mdi-account-plus"></i>             
-				  <span class="menu-title">MANAGE LEADS</span>
+				  <span class="menu-title">Manage Leads</span>
 				</a>
 			  </li> 
 			 </ul>

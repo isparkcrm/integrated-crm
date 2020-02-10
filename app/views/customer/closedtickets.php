@@ -100,9 +100,12 @@ font-weight: bold;
 </style>
 
  <script>
- $(document).ready(function() {
- $('#example').DataTable();
-});
+$(document).ready( function() {
+    $('#example').dataTable({
+        /* Disable initial sort */
+        "aaSorting": []
+    });
+})
  </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>
               

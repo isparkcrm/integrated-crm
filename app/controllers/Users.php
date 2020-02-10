@@ -164,11 +164,13 @@ if(!empty($loggedInUser)){
   $time=date("Y-m-d H:i:s");
   $username=$data['email'];
  if($this->userModel->loginHistory($ipaddr, $time,$username,$browser,$platform,$version)){
+	 
    // value update in db
  }
 
   //Create Session
 $this->createUserSession($loggedInUser);
+
 }else {
   $atmp++;
   flash('password_incorrect', 'Invalid Username/Password');

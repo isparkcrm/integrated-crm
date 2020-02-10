@@ -269,7 +269,25 @@ public function getuserCampaign1($email){
      return $total;
  
 }
+//-------------------------------------------------------------------------------------------------
+public function updateemailreadstatus($ticketID)
+{
+$readstatus='0';
+$this->db->query('UPDATE emails SET read_status = :readstatus  WHERE ticketID = :ticketID');
 
+$this->db->bind(':readstatus', $readstatus);
+$this->db->bind(':ticketID', $ticketID);
+
+if($this->db->execute())
+{
+  return true;
+}
+else 
+{
+return false;
+}
+}
+//--------------------------------------------------------------------------------------------------
 public function getunreadEmails($ticketid)
 {
 	

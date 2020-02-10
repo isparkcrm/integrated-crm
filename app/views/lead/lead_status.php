@@ -33,7 +33,13 @@ $(function(){
 <div class="main-panel">
         <div class="content-wrapper">
           <div class="row purchace-popup">
-         
+         <div class="col-md-4">
+		  </div>
+        <div class="col-md-4">
+			<input type="search" id="myInput" placeholder="Please Search here..."  class="form-control">
+			</div>
+			<div class="col-md-4">
+			</div>
           </div>
    </div>
 
@@ -41,14 +47,14 @@ $(function(){
 		<div class="card">
 		<div class="card-body">
 			<div class="table-responsive">
-			<table class="table table-hover dataTable table-striped" id="example">
+			<table class="table table-hover dataTable table-striped display" id="">
                   <thead>
 				  <tr style="background-color:#009688; color:white;">
 							<th colspan="9" style="text-align: center;">Commits</th>
 						</tr>
                     <tr>
                           <th>Lead Id</th>  						 
-                          <th>Customer Name</th>  
+                          <th>Company Name</th>  
 						  <th>Product</th>                  
                           <th>Value</th>						 
 						  <th>Lead Status</th>
@@ -90,28 +96,34 @@ $(function(){
                    <td><a href="<?php echo URLROOT;?>/leads/leadclose/<?php echo $leads->id; ?>"><i class=" icon fa fa-check-circle fa-1x" data-toggle="tooltip" title data-original-title="Close"></i></a> 
 
 						<a href="<?php echo URLROOT;?>/leads/leaddrop/<?php echo $leads->id; ?>"><i class="icon1 fa fa-times-circle fa-1x" data-toggle="tooltip" title data-original-title="Drop"></i></a> 
-								<a href="<?php echo URLROOT;?>/leads/leaddelete/<?php echo $leads->id; ?>"><i class="fa fa-trash fa-1x" data-toggle="tooltip" title data-original-title="Delete"></i></a> 
+							
                      <a href="<?php echo URLROOT;?>/leads/leadlost/<?php echo $leads->id; ?>"><i class=" icon2 fa fa-exclamation-circle fa-1x" data-toggle="tooltip" title data-original-title="Lost"></i></a>
                      
 						<a href="<?php echo URLROOT;?>/leads/leadpostponed/<?php echo $leads->id; ?>"><i class="fa fa-calendar fa-1x" data-toggle="tooltip" title data-original-title="Postponed"></i></a>
 					  </td>
 					 <td style="display: none;"></td> 
 				 <?php endforeach;?>
+ 
 			  </tbody>
+			  	   <tr style=" font-weight: bold; background-color: #4CAF50; color: white;"><td></td> <td></td>
+                                       <td> Total</td> 
+                                     <td> <?php echo $data['committotal'];?></td>
+                                     <td></td><td></td><td></td><td></td> </tr>
+				 
           </table>
 		 
 		  <br>
 <hr>
 
 <br>
-		  <table class="table table-hover dataTable table-striped" id="example1" >
+		  <table class="table table-hover dataTable table-striped display" id="" >
                   <thead>
 				  <tr style="background-color:#009688; color:white;">
 							<th colspan="9" style="text-align: center;">Upside</th>
 						</tr>
                     <tr>
                           <th>Lead Id</th>  
-						  <th>Customer Name</th>  
+						  <th>Company Name</th>  
 						  <th>Product</th>                  
                           <th>Value</th>						 
 						  <th>Lead Status</th>
@@ -153,7 +165,7 @@ $(function(){
                    <td><a href="<?php echo URLROOT;?>/leads/leadclose/<?php echo $leads->id; ?>"><i class=" icon fa fa-check-circle fa-1x" data-toggle="tooltip" title data-original-title="Close"></i></a> 
 
 						<a href="<?php echo URLROOT;?>/leads/leaddrop/<?php echo $leads->id; ?>"><i class="icon1 fa fa-times-circle fa-1x" data-toggle="tooltip" title data-original-title="Drop"></i></a> 
-
+				<a href="<?php echo URLROOT;?>/leads/leaddelete/<?php echo $leads->id; ?>"><i class="fa fa-trash fa-1x" data-toggle="tooltip" title data-original-title="Delete"></i></a> 
                      <a href="<?php echo URLROOT;?>/leads/leadlost/<?php echo $leads->id; ?>"><i class=" icon2 fa fa-exclamation-circle fa-1x" data-toggle="tooltip" title data-original-title="Lost"></i></a>
                      
 						<a href="<?php echo URLROOT;?>/leads/leadpostponed/<?php echo $leads->id; ?>"><i class="fa fa-calendar fa-1x" data-toggle="tooltip" title data-original-title="Postponed"></i></a>
@@ -162,20 +174,26 @@ $(function(){
 					 
                  </tr> 
 				 <?php endforeach;?>
+				
+					
 			  </tbody>
+			     <tr style=" font-weight: bold; background-color: #4CAF50; color: white;"><td></td> <td></td>
+                                       <td> Total</td> 
+                                     <td> <?php echo $data['upsidetotal'];?></td>
+                                     <td></td><td></td><td></td><td></td> </tr>
           </table>
  <br>
 <hr>
 
 <br>
-		  <table class="table table-hover dataTable table-striped" id="example2" >
+		  <table class="table table-hover dataTable table-striped display" id="" >
                   <thead>
 				  <tr style="background-color:#009688; color:white;">
 							<th colspan="9" style="text-align: center;"> Lead</th>
 						</tr>
                     <tr>
                           <th>Lead Id</th>  
-						  <th>Customer Name</th>  
+						  <th>Company Name</th>  
 						  <th>Product</th>                  
                           <th>Value</th>
 						
@@ -218,7 +236,7 @@ $(function(){
                     <td><a href="<?php echo URLROOT;?>/leads/leadclose/<?php echo $leads->id; ?>"><i class=" icon fa fa-check-circle fa-1x" data-toggle="tooltip" title data-original-title="Close"></i></a> 
 
 						<a href="<?php echo URLROOT;?>/leads/leaddrop/<?php echo $leads->id; ?>"><i class="icon1 fa fa-times-circle fa-1x" data-toggle="tooltip" title data-original-title="Drop"></i></a> 
-
+				<a href="<?php echo URLROOT;?>/leads/leaddelete/<?php echo $leads->id; ?>"><i class="fa fa-trash fa-1x" data-toggle="tooltip" title data-original-title="Delete"></i></a> 
                      <a href="<?php echo URLROOT;?>/leads/leadlost/<?php echo $leads->id; ?>"><i class=" icon2 fa fa-exclamation-circle fa-1x" data-toggle="tooltip" title data-original-title="Lost"></i></a>
                      
 						<a href="<?php echo URLROOT;?>/leads/leadpostponed/<?php echo $leads->id; ?>"><i class="fa fa-calendar fa-1x" data-toggle="tooltip" title data-original-title="Postponed"></i></a>
@@ -227,20 +245,25 @@ $(function(){
 					
                  </tr> 
 				 <?php endforeach;?>
+				 			 
 			  </tbody>
+			      <tr style=" font-weight: bold; background-color: #4CAF50; color: white;"><td></td> <td></td>
+                                       <td> Total</td> 
+                                     <td> <?php echo $data['leadtotal'];?></td>
+                                     <td></td><td></td><td></td><td></td> </tr>
           </table>
 		  <br>
 <hr>
 
 <br>
-		  <table class="table table-hover dataTable table-striped" id="example3" >
+		  <table class="table table-hover dataTable table-striped display" id="" >
                   <thead>
 				  <tr style="background-color:#009688; color:white;">
 							<th colspan="9" style="text-align: center;">Cold </th>
 						</tr>
                     <tr>
                           <th>Lead Id</th>  
-						  <th>Customer Name</th>  
+						  <th>Company Name</th>  
 						  <th>Product</th>                  
                           <th>Value</th>
 						
@@ -283,7 +306,7 @@ $(function(){
                     <td><a href="<?php echo URLROOT;?>/leads/leadclose/<?php echo $leads->id; ?>"><i class=" icon fa fa-check-circle fa-1x" data-toggle="tooltip" title data-original-title="Close"></i></a> 
 
 						<a href="<?php echo URLROOT;?>/leads/leaddrop/<?php echo $leads->id; ?>"><i class="icon1 fa fa-times-circle fa-1x" data-toggle="tooltip" title data-original-title="Drop"></i></a> 
-
+				<a href="<?php echo URLROOT;?>/leads/leaddelete/<?php echo $leads->id; ?>"><i class="fa fa-trash fa-1x" data-toggle="tooltip" title data-original-title="Delete"></i></a> 
                      <a href="<?php echo URLROOT;?>/leads/leadlost/<?php echo $leads->id; ?>"><i class=" icon2 fa fa-exclamation-circle fa-1x" data-toggle="tooltip" title data-original-title="Lost"></i></a>
                      
 						<a href="<?php echo URLROOT;?>/leads/leadpostponed/<?php echo $leads->id; ?>"><i class="fa fa-calendar fa-1x" data-toggle="tooltip" title data-original-title="Postponed"></i></a>
@@ -292,7 +315,14 @@ $(function(){
 					
                  </tr> 
 				 <?php endforeach;?>
+				 
+				 
 			  </tbody>
+			    <tr style=" font-weight: bold; background-color: #4CAF50; color: white;"><td></td> <td></td>
+                                       <td> Total</td> 
+                                     <td> <?php echo $data['coldtotal'];?></td>
+                                     <td></td><td></td><td></td><td></td> </tr>
+			  
           </table>
 		 </div>           
 	   </div>
@@ -300,38 +330,21 @@ $(function(){
 	</div>
 	
   </div>  
-  <script>
-$(document).ready( function() {
-    $('#example').dataTable({
-        /* Disable initial sort */
-        "aaSorting": []
-    });
-})
+ <script>
+$(document).ready(function() {
+    $('table.display').DataTable();
+} );
  </script> 
  <script>
-$(document).ready( function() {
-    $('#example1').dataTable({
-        /* Disable initial sort */
-        "aaSorting": []
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
-})
- </script> 
- <script>
-$(document).ready( function() {
-    $('#example2').dataTable({
-        /* Disable initial sort */
-        "aaSorting": []
-    });
-})
- </script> 
-  <script>
-$(document).ready( function() {
-    $('#example3').dataTable({
-        /* Disable initial sort */
-        "aaSorting": []
-    });
-})
- </script>
+  });
+});
+</script>
  <style>
  
 table td > .wrap {

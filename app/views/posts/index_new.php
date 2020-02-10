@@ -321,7 +321,7 @@ $(document).ready(function() {
                       <p class="mb-0 text-right">Critical</p>
 					  
 					  <div class="fluid-container">                                              
-                         <a href="" style="color: black; text-decoration: none;">
+                          <a href="<?php echo URLROOT; ?>/posts/reports" style="color: black; text-decoration: none;">
 					
                         <h3 class="font-weight-medium text-right mb-0"><?php echo $data['critical'];?></h3> </a>                      
                       </div>
@@ -350,7 +350,7 @@ $(document).ready(function() {
                     <div class="float-right">
                       <p class="mb-0 text-right">high</p>
                       <div class="fluid-container">                         
-              <a href="" style="color: black; text-decoration: none;">
+            <a href="<?php echo URLROOT; ?>/posts/reports" style="color: black; text-decoration: none;">
                         <h3 class="font-weight-medium text-right mb-0"><?php echo $data['high'];?></h3> </a>
                       </div>
                     </div>
@@ -379,7 +379,7 @@ $(document).ready(function() {
                       <p class="mb-0 text-right">Medium</p>
                       <div class="fluid-container">   
                          
-               <a href="low.php" style="color: black; text-decoration: none;">
+                <a href="<?php echo URLROOT; ?>/posts/reports" style="color: black; text-decoration: none;">
                         <h3 class="font-weight-medium text-right mb-0"><?php echo $data['medium'];?></h3> </a>
                       </div>
                     </div>
@@ -408,8 +408,8 @@ $(document).ready(function() {
                       <p class="mb-0 text-right">Low</p>
                       <div class="fluid-container"> 
                          
-              <a href="customers.php" style="color: black; text-decoration: none;">
-                        <h3 class="font-weight-medium text-right mb-0"></h3><?php echo $data['low'];?> </a>
+              <a href="<?php echo URLROOT; ?>/posts/reports" style="color: black; text-decoration: none;">
+                        <h3 class="font-weight-medium text-right mb-0"><?php echo $data['low'];?> </h3></a>
                       </div>
                     </div>
                   </div>
@@ -467,15 +467,15 @@ $(document).ready(function() {
 									for($i=1;$i<=$Rows;$i++){ 
 								?>
                          <td><?php $campaignname=$this->userModel->campaignname($i); echo $campaignname; ?></td>
-						   <td style="text-align: center;"><?php $open=$this->userModel->campaignopen($i); echo $open; ?> </td>
-						   <td style="text-align: center;"><?php $close=$this->userModel->campaignclose($i);echo $close; ?> </td>
-						   <td style="text-align: center;"><?php $opentoday=$this->userModel->campaignopentoday($i); echo $opentoday; ?> </td>
-						   <td style="text-align: center;"><?php $closetoday=$this->userModel->campaignclosetoday($i);echo $closetoday; ?></td>
-						   <td style="text-align: center;"><?php $critical=$this->userModel->campaigncritical($i); echo $critical; ?> </td>
-						   <td style="text-align: center;"><?php $high=$this->userModel->campaignhigh($i); echo $high; ?> </td>
-						   <td style="text-align: center;"><?php $medium=$this->userModel->campaignmedium($i); echo $medium; ?></td>
-						   <td style="text-align: center;"><?php $low=$this->userModel->campaignlow($i); echo $low; ?> </td>    
-						   <td style="text-align: center;"><?php $sla=$this->userModel->campaignsla($i); echo $sla; ?> </td> 
+						   <td style="text-align: center;"> <a href="<?php echo URLROOT; ?>/posts/reports" style="color: black; text-decoration: none;"><?php $open=$this->userModel->campaignopen($i); echo $open; ?></a> </td>
+						   <td style="text-align: center;"><a href="<?php echo URLROOT; ?>/posts/reports_close" style="color: black; text-decoration: none;"><?php $close=$this->userModel->campaignclose($i);echo $close; ?> </a></td>
+						   <td style="text-align: center;"><a href="<?php echo URLROOT; ?>/posts/reports" style="color: black; text-decoration: none;"><?php $opentoday=$this->userModel->campaignopentoday($i); echo $opentoday; ?> </a></td>
+						   <td style="text-align: center;"> <a href="<?php echo URLROOT; ?>/posts/reports_close" style="color: black; text-decoration: none;"><?php $closetoday=$this->userModel->campaignclosetoday($i);echo $closetoday; ?></a></td>
+						   <td style="text-align: center;"><a href="<?php echo URLROOT; ?>/posts/reports" style="color: black; text-decoration: none;"><?php $critical=$this->userModel->campaigncritical($i); echo $critical; ?> </a></td>
+						   <td style="text-align: center;"><a href="<?php echo URLROOT; ?>/posts/reports" style="color: black; text-decoration: none;"><?php $high=$this->userModel->campaignhigh($i); echo $high; ?> </a></td>
+						   <td style="text-align: center;"><a href="<?php echo URLROOT; ?>/posts/reports" style="color: black; text-decoration: none;"><?php $medium=$this->userModel->campaignmedium($i); echo $medium; ?></a></td>
+						   <td style="text-align: center;"><a href="<?php echo URLROOT; ?>/posts/reports" style="color: black; text-decoration: none;"><?php $low=$this->userModel->campaignlow($i); echo $low; ?></a> </td>    
+						   <td style="text-align: center;"><a href="<?php echo URLROOT; ?>/posts/reports" style="color: black; text-decoration: none;"><?php $sla=$this->userModel->campaignsla($i); echo $sla; ?></a> </td> 
 						</tr>
 						<?php }  ?>
                        

@@ -654,4 +654,315 @@ function servicedelete($id)
 return true;
 }
 //-------------------------------------------------------------------------------------------------------
+//--------------------------------- User Wise report Functions ------------------------------------------
+  
+    public function countuser(){
+      $this->db->query('SELECT  COUNT(id) AS total FROM users');
+      $row = $this->db->single();
+      $username= $row->total;
+     //print_r($camapignID);die;
+      return $username;
+      }
+//------------------------------------------------------------------------------------------------------
+        public function username($i){
+      $this->db->query('SELECT username FROM users WHERE id=:id');
+        $this->db->bind(':id', $i);
+      $row = $this->db->single();
+      $camapignID = $row->username;
+     //print_r($camapignID);die;
+      return $camapignID;
+      }
+//--------------------------------------------------------------------------------------------------
+        public function username1($email){
+      $this->db->query('SELECT username FROM users WHERE email=:id');
+        $this->db->bind(':id', $email);
+      $row = $this->db->single();
+      $camapignID = $row->username;
+     //print_r($camapignID);die;
+      return $camapignID;
+      }
+//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------
+        public function useremail($i){
+      $this->db->query('SELECT email FROM users WHERE id=:id');
+        $this->db->bind(':id', $i);
+      $row = $this->db->single();
+      $camapignID = $row->email;
+     //print_r($camapignID);die;
+      return $camapignID;
+      }
+//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------
+        public function userrole($i){
+      $this->db->query('SELECT role FROM users WHERE id=:id');
+        $this->db->bind(':id', $i);
+      $row = $this->db->single();
+      $camapignID = $row->role;
+     //print_r($camapignID);die;
+      return $camapignID;
+      }
+//--------------------------------------------------------------------------------------------------
+       public function useropen($email){
+        $status ="close";
+      $this->db->query('SELECT COUNT(status) AS total FROM tickets WHERE assigned_to=:email AND status!=:status');
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+      $row = $this->db->single();
+      $camapignID = $row->total;
+     //print_r($camapignID);die;
+      return $camapignID;
+      }
+//-------------------------------------------------------------------------------------------------------------
+       public function userclose($email){
+        $status ="close";
+      $this->db->query('SELECT COUNT(status) AS total FROM closedtickets WHERE assigned_to=:email AND status=:status');
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+      $row = $this->db->single();
+      $camapignID = $row->total;
+     //print_r($camapignID);die;
+      return $camapignID;
+      }
+//-------------------------------------------------------------------------------------------------------------
+       public function useropentoday($email){
+        $status ="close";
+      $this->db->query('SELECT COUNT(status) AS total FROM tickets WHERE assigned_to=:email AND status!=:status  AND  DAY(created_at) = DAY(NOW())');
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+//-------------------------------------------------------------------------------------------------------------
+       public function userclosetoday($email){
+        $status ="close";
+      $this->db->query('SELECT COUNT(status) AS total FROM closedtickets WHERE assigned_to=:email AND status=:status  AND  DAY(closed_at) = DAY(NOW())');
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+//-------------------------------------------------------------------------------------------------------------  
+       public function usercritical($email){
+        $status ="close";
+        $severity="P1";
+      $this->db->query('SELECT COUNT(severity) AS total FROM tickets WHERE assigned_to=:email  AND status!=:status AND severity=:severity');
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+         $this->db->bind(':severity', $severity);
+         
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+//------------------------------------------------------------------------------------------------------------- 
+       public function userhigh($email){
+        $status ="close";
+        $severity="P2";
+      $this->db->query('SELECT COUNT(severity) AS total FROM tickets WHERE assigned_to=:email AND status!=:status AND severity=:severity');
+      $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+         $this->db->bind(':severity', $severity);   
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+//-------------------------------------------------------------------------------------------------------------
+     public function usermedium($email){
+        $status ="close";
+        $severity="P3";
+      $this->db->query('SELECT COUNT(severity) AS total FROM tickets WHERE assigned_to=:email AND status!=:status AND severity=:severity');
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+         $this->db->bind(':severity', $severity);   
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+//-------------------------------------------------------------------------------------------------------------
+       public function userlow($email){
+        $status ="close";
+        $severity="P4";
+      $this->db->query('SELECT COUNT(severity) AS total FROM tickets WHERE assigned_to=:email AND status!=:status AND severity=:severity');
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+         $this->db->bind(':severity', $severity);   
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+//------------------------------------------------------------------------------------------------------------- 
+         public function usersla($email){
+        $status ="Close";
+       
+        $time="0";
+      $this->db->query('SELECT COUNT(l1) AS total FROM tickets WHERE assigned_to=:email  AND status!=:status AND l1!=:time');
+       $this->db->bind(':email', $email);;
+          $this->db->bind(':status', $status);
+         $this->db->bind(':time', $time);   
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+    
+//-------------------------------------------------------------------------------------------------------------
+//*********************************************  date wise filter Report ***************************************
+//-------------------------------------------------------------------------------------------------------------
+  public function useropenDate($email,$from,$to){
+        $status ="close";
+      $this->db->query('SELECT COUNT(status) AS total FROM tickets WHERE assigned_to=:email AND status!=:status AND created_at >= :from_date AND  created_at <=:to_date
+                                 ');
+
+  
+   $this->db->bind(':from_date', $from);
+   $this->db->bind(':to_date', $to);
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+      $row = $this->db->single();
+      $camapignID = $row->total;
+     //print_r($camapignID);die;
+      return $camapignID;
+      }
+//-------------------------------------------------------------------------------------------------------------
+       public function usercloseDate($email,$from,$to){
+        $status ="close";
+      $this->db->query('SELECT COUNT(status) AS total FROM closedtickets WHERE assigned_to=:email AND status=:status AND closed_at >= :from_date AND  closed_at <=:to_date');
+      $this->db->bind(':from_date', $from);
+      $this->db->bind(':to_date', $to);
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+      $row = $this->db->single();
+      $camapignID = $row->total;
+     //print_r($camapignID);die;
+      return $camapignID;
+      }
+//-------------------------------------------------------------------------------------------------------------
+       public function useropentodayDate($email,$from,$to){
+        $status ="close";
+      $this->db->query('SELECT COUNT(status) AS total FROM tickets WHERE assigned_to=:email AND status!=:status  AND  DAY(created_at) = DAY(NOW())');
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+//-------------------------------------------------------------------------------------------------------------
+       public function userclosetodayDate($email,$from,$to){
+        $status ="close";
+      $this->db->query('SELECT COUNT(status) AS total FROM closedtickets WHERE assigned_to=:email AND status=:status  AND  DAY(closed_at) = DAY(NOW())');
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+//-------------------------------------------------------------------------------------------------------------  
+       public function usercriticalDate($email,$from,$to){
+        $status ="close";
+        $severity="P1";
+      $this->db->query('SELECT COUNT(severity) AS total FROM tickets WHERE assigned_to=:email  AND status!=:status AND severity=:severity AND created_at >= :from_date AND  created_at <=:to_date
+                                 ');
+
+  
+   $this->db->bind(':from_date', $from);
+   $this->db->bind(':to_date', $to);
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+         $this->db->bind(':severity', $severity);
+         
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+//------------------------------------------------------------------------------------------------------------- 
+       public function userhighDate($email,$from,$to){
+        $status ="close";
+        $severity="P2";
+      $this->db->query('SELECT COUNT(severity) AS total FROM tickets WHERE assigned_to=:email AND status!=:status AND severity=:severity AND created_at >= :from_date AND  created_at <=:to_date
+                                 ');
+
+  
+   $this->db->bind(':from_date', $from);
+   $this->db->bind(':to_date', $to);
+      $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+         $this->db->bind(':severity', $severity);   
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+//-------------------------------------------------------------------------------------------------------------
+     public function usermediumDate($email,$from,$to){
+        $status ="close";
+        $severity="P3";
+      $this->db->query('SELECT COUNT(severity) AS total FROM tickets WHERE assigned_to=:email AND status!=:status AND severity=:severity AND created_at >= :from_date AND  created_at <=:to_date
+                                 ');  
+   $this->db->bind(':from_date', $from);
+   $this->db->bind(':to_date', $to);
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+         $this->db->bind(':severity', $severity);   
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+//-------------------------------------------------------------------------------------------------------------
+       public function userlowDate($email,$from,$to){
+        $status ="close";
+        $severity="P4";
+      $this->db->query('SELECT COUNT(severity) AS total FROM tickets WHERE assigned_to=:email AND status!=:status AND severity=:severity AND created_at >= :from_date AND  created_at <=:to_date
+                                  ');
+
+  
+   $this->db->bind(':from_date', $from);
+   $this->db->bind(':to_date', $to);
+       $this->db->bind(':email', $email);
+          $this->db->bind(':status', $status);
+         $this->db->bind(':severity', $severity);   
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+//------------------------------------------------------------------------------------------------------------- 
+         public function userslaDate($email,$from,$to){
+        $status ="Close";
+       
+        $time="0";
+      $this->db->query('SELECT COUNT(l1) AS total FROM tickets WHERE assigned_to=:email  AND status!=:status AND l1!=:time AND created_at >= :from_date AND  created_at <=:to_date
+                                 ');
+
+  
+   $this->db->bind(':from_date', $from);
+   $this->db->bind(':to_date', $to);;
+       $this->db->bind(':email', $email);;
+          $this->db->bind(':status', $status);
+         $this->db->bind(':time', $time);   
+      $row = $this->db->single();
+      $camapignID = $row->total;
+    // print_r($camapignID);die;
+      return $camapignID;
+      }
+    
+//-------------------------------------------------------------------------------------------------------------
+public function getuserName(){
+  $this->db->query('SELECT  username,email FROM users ORDER BY id ASC');
+                    $results = $this->db->resultSet();
+                    return $results;
+     }
+//------------------------------------------------------------------------------------------------------------
+
 }

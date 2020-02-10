@@ -3,10 +3,8 @@
     public function __construct(){
       $this->leadModel = $this->model('lead');
 	  $this->userModel = $this->model('User');
-	  $this->ticketModel = $this->model('Ticket');
       $this->campaignModel = $this->model('campaignModel'); 
     }
-	
 //----------------------------------------------------------------------------------------------------------------
 public function lead_master(){
       
@@ -30,8 +28,6 @@ $data =[
  'assignee' => trim($_POST['assignee']),
  'ordervalue' => trim($_POST['ordervalue']),
  'closuredate' => trim($_POST['closuredate']),
- 'period' => trim($_POST['period']),
- 'paymentperiod' => trim($_POST['paymentperiod']),
  'status' => trim($_POST['status']),
  'leadowner_err' => '',         
   'customertype_err' => '',
@@ -44,15 +40,13 @@ $data =[
  'email_err' => '', 
  'vertical_err' => '',
  'oem_err' => '',
- 'product_err' => '', 
- 'leadstatus_err' => '', 
+ 'product_err' => '',                 
  'assign_err' => '',
  'ordervalue_err' => '', 
- 'closuredate_err' => '',
- 'leadperiod_err' => '' 
+ 'closuredate_err' => '' 
 ];
 
-$user_email=$_SESSION['email'];	
+	
 if(empty($data['customername'])){
  $data['customername_err'] = 'Please enter Customer Name';
 }
@@ -107,7 +101,7 @@ if(empty($data['product'])){
 
 if(empty($data['customername_err']) && empty($data['customertype_err']) && empty($data['company_err']) && empty($data['leadsource_err']) && empty($data['vertical_err']) && empty($data['oem_err']) && empty($data['product_err']) && empty($data['closuredate_err'])){
  
-    if($this->leadModel->Insertlead($data,$user_email))
+    if($this->leadModel->Insertlead($data))
     {
      flash('lead_success', 'Lead Added Successfully');  
    redirect('leads/lead_master'); 
@@ -137,8 +131,7 @@ $data =[
   'leadstatus' => '',     
   'assignee' => '',  
   'ordervalue' => '',      
-  'closuredate' => '', 
-    'period' => '',   
+  'closuredate' => '',      
   'leadstatus_err' => '',         
   'customertype_err' => '',             
   'leadowner_err' => '',
@@ -155,8 +148,7 @@ $data =[
   'leadstatus_err' => '',
   'assign_err' => '',
   'ordervalue_err' => '',
-  'closuredate_err' => '',
-  'leadperiod_err' => ''
+  'closuredate_err' => ''
   
 ];
 $data['assignee'] = $this->leadModel->getallassignee();
@@ -305,7 +297,7 @@ public function leadlist(){
  {
    $accountmanager = $_SESSION['email'];
 
-    $data['commitleadlist'] = $this->leadModel->usercommitlead($accountmanager); 
+ $data['commitleadlist'] = $this->leadModel->usercommitlead($accountmanager); 
  $data['upsideleadlist'] = $this->leadModel->userupsidelead($accountmanager); 
  $data['coldleadlist'] = $this->leadModel->usercoldandlead($accountmanager);
   $data['leadleadlist'] = $this->leadModel->userlead($accountmanager);
@@ -321,11 +313,7 @@ $data['coldtotal'] = $this->leadModel->getcoldtotal1($accountmanager);
 	  $data['commitleadlist'] = $this->leadModel->getcommitlead(); 
  $data['upsideleadlist'] = $this->leadModel->getupsidelead(); 
  $data['coldleadlist'] = $this->leadModel->getcoldandlead();
- $data['leadleadlist'] = $this->leadModel->getleadlead();
-$data['committotal'] = $this->leadModel->getcommittotal1(); 
-    $data['upsidetotal'] = $this->leadModel->getupsidetotal();
-	$data['leadtotal'] = $this->leadModel->getleadtotal();
-	$data['coldtotal'] = $this->leadModel->getcoldtotal();
+$data['committotal'] = $this->leadModel->getcommittotal1();     
    $this->view('saleshead/leadlist',$data);
  }
 //---------------------------------------------------------------------------------------------------------------
@@ -668,7 +656,6 @@ public function onlineleadedit($id)
  'assignee' => trim($_POST['assignee']),
  'ordervalue' => trim($_POST['ordervalue']),
  'closuredate' => trim($_POST['closuredate']),
-  'period' => trim($_POST['period']),
  'status' => trim($_POST['status']),
  'leadowner_err' => '',         
   'customertype_err' => '',
@@ -746,7 +733,7 @@ if(empty($data['customertype_err']) && empty($data['customername_err']) && empty
       }
     } else {
       // Load view with errors
-      $this->view('lead/onlineleadedit', $data);
+      $this->view('lead/leadedit', $data);
     }
 
   } else {
@@ -770,7 +757,6 @@ if(empty($data['customertype_err']) && empty($data['customername_err']) && empty
 	  'product' =>$lead->product,
 	  'ordervalue' =>$lead->ordervalue,
 	  'closuredate' =>$lead->closuredate,
-	   'period' =>$lead->leadperiod,
 	  'leadowner_err' => '',
 	   'customertype_err' => '',
 	   'customername_err' => '',
@@ -828,9 +814,7 @@ $data =[
  'nextactiondate' => trim($_POST['nextactiondate'])
 ];
 
-$user_email=$_SESSION['username'];
-
-   if($this->leadModel->Insertstatus($data,$user_email))
+   if($this->leadModel->Insertstatus($data))
     {
     flash('lead_success', 'Lead Status Added Successfully');  
   redirect('leads/salesleadlist_new');
@@ -906,14 +890,13 @@ if(empty($data['nextactiondate'])){
  $data['nextactiondate_err'] = 'Please enter Last Name';
 }
 if(empty($data['actiontaken_err']) && empty($data['nextaction_err']) && empty($data['nextactiondate_err'])){
- $user_email=$_SESSION['username'];
-
-   if($this->leadModel->Insertstatus($data,$user_email))
+ 
+    if($this->leadModel->Insertstatus($data))
     {
-      flash('lead_success', 'Lead Status Added Successfully');  
-   redirect('leads/leadlist'); 
+      
     }
-  
+   flash('lead_success', 'Lead Status Added Successfully');  
+   redirect('leads/leadlist');
      
 
  } 
@@ -937,10 +920,6 @@ else {
  $data['upsideleadlist'] = $this->leadModel->userupsidelead($accountmanager); 
  $data['coldleadlist'] = $this->leadModel->usercoldandlead($accountmanager);
   $data['leadleadlist'] = $this->leadModel->userlead($accountmanager);
-  $data['committotal'] = $this->leadModel->getcommittotal($accountmanager); 
-$data['upsidetotal'] = $this->leadModel->getupsidetotal1($accountmanager); 
-$data['leadtotal'] = $this->leadModel->getleadtotal1($accountmanager); 
-$data['coldtotal'] = $this->leadModel->getcoldtotal1($accountmanager); 
 $this->view('lead/lead_status', $data);
 }
 }
@@ -973,7 +952,6 @@ $data =[
  'ordervalue' => trim($_POST['ordervalue']),
  'created_at' => trim($_POST['created_at']), 
  'assignee' => trim($_POST['assignee']), 
- 'period' => trim($_POST['period']), 
  'confirmation' => trim($_POST['confirmation']), 
  'closure_value' => trim($_POST['closure_value']),
  'payment' => trim($_POST['payment']),
@@ -981,11 +959,9 @@ $data =[
  'info' => trim($_POST['info']),
  'date1' => trim($_POST['date1']),
  'date2' => trim($_POST['date2']),
- 'service' => implode(",", $_POST['service']), 
  'closedvalue_err' => '',         
  'confirmation_err' => '',         
- 'payment_err' => '',
- 'service_err' => '' 
+ 'payment_err' => ''
 ];
 $status = trim($_POST['status']);
 if(empty($data['closedate'])){
@@ -1045,11 +1021,9 @@ else {
     'assignee' =>$lead->assignee,
     'ordervalue' =>$lead->ordervalue,
     'created_at' =>$lead->created_at,
-	 'period' =>$lead->leadperiod,
     'closedvalue_err' => '',         
  'confirmation_err' => '',         
- 'payment_err' => '',
-  'service_err' => ''
+ 'payment_err' => ''
     
     ]; 
   

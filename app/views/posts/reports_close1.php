@@ -1,56 +1,21 @@
 
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <?php require APPROOT . '/views/inc/navbar.php'; ?>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+ 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/datatables/dataTables.bootstrap.css"> 
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo URLROOT; ?>/public/datatables/jquery.dataTables.min.js"></script>
-<script>
-$(document).ready(function() {
-    var interval = setInterval(function() {
-        var momentNow = moment();
-        $('#date-part').html(momentNow.format('DD MMMM YYYY') + ' '
-                            + momentNow.format('dddd')
-                             .substring(0,3).toUpperCase());
-        $('#time-part').html(momentNow.format('hh:mm:ss A'));
-    }, 100);
-    });
-</script>
-<style>
-.time-frame {
-    background-color: #000000;
-    color: #ffffff;
-    width: 300px;
-    font-family: Arial;
-}
-
-.time-frame > div {
-    width: 100%;
-    text-align: center;
-}
-
-#date-part {
-    font-size: 0.80em;
-}
-#time-part {
-    font-size: 0.80em;
-}
-</style>
       <!-- partial -->
       <div class="main-panel">
-	  <div class="row">
-		<div style="margin-left: 83.7%;" id='time-part'></div>
-		<div style="margin-left: 82%;" id='date-part'></div>
-	  </div>
         <div class="content-wrapper">
           <div class="row purchace-popup">
             <div class="col-12">
               
             </div>
           </div>         
-   <div id='time-part'></div>
-
-           <div class="row">
+          <div class="row">
    <div class="col-lg-12 grid-margin stretch-card">
      <div class="card">
         <div class="card-body">
@@ -59,8 +24,8 @@ $(document).ready(function() {
             <div class="col-lg-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title"><strong>Open Tickets Report </strong></h4>
-                  <form action="<?php echo URLROOT; ?>/posts/reports" method="post">                 
+                  <h4 class="card-title"><strong>Closed Tickets Report </strong></h4>
+                  <form action="<?php echo URLROOT; ?>/posts/reports_close" method="post">                 
                               
                     <div class="row">
                      <div class="col-md-3">
@@ -113,11 +78,17 @@ $(document).ready(function() {
                   <button type="submit" class="btn btn-info" style="margin-top: 30px;" name="submit">
                     <i class="fa fa-search" aria-hidden="true"></i>
                   </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <a href="<?php echo URLROOT; ?>/posts/reports" style="margin-top: 30px;"  class="btn btn-info">  <i class="fa fa-undo" aria-hidden="true"></i></a>                 
+                  <a href="<?php echo URLROOT; ?>/tickets/reports" style="margin-top: 30px;"  class="btn btn-info">  <i class="fa fa-undo" aria-hidden="true"></i></a>                 
                 </div>
                  </form>
 
-          
+                 <!--   <div class="col-md-3">                
+                  <form method="post" action="">
+                    <button type="submit" class="btn btn-info" style="margin-top: 30px;" name="export">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                  </button>
+                  </form>
+                </div>  -->
                     </div>     
 
                     <br>
@@ -166,43 +137,26 @@ $(document).ready(function() {
     <!--------------------------------------------------------------------------------------------------------- -->  
     <!--------------------------------------------------------------------------------------------------------- -->              
         </div>
-
-		
-          </div>                     
-        </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->       
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
+      <script>
+ $(document).ready(function() {
+ $('#example').DataTable();
+});
+ </script>
 
-<style type="text/css">
- .menu-icon {
+<style type="text/css"> .menu-icon {
     margin-right: 1.25rem;
     width: 16px;
     line-height: 1;
     font-size: 18px;
     color: black;
 }
-
-tr:nth-child( 2n ) {
-  background-color:#ded3f6;
-  font-weight: bold;
-}
-tr:nth-child( 2n + 1 ) {
-  background-color: #b8f1d5;
-font-weight: bold;
-}
 </style>
- <script>
- $(document).ready(function() {
- $('#example').DataTable();
-});
- </script>
+
 <?php require APPROOT . '/views/inc/footer.php'; ?>
               
                          

@@ -596,8 +596,83 @@ else  if(empty($data['campaign']) ){
    
     
   }
+//------------------------------------------------------------------------------------------------------------------
+public function reports_close(){
 
+  // Check for owner
+    
+  
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      // Sanitize POST array
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+      $data =[
+          'from' => trim($_POST['from_date']), 
+          'to' => trim($_POST['to_date']),          
+         'severity' => trim($_POST['severity']),     
+         'campaign'=> trim($_POST['campaign']),     
+        ];
+         
+  if(empty($data['severity']) && empty($data['campaign']) ){
+          $status='Close';
+    $tickets = $this->ticketModel->getcloseTickets1($status,$data);
+    // Check for owner
+    $data = [
+    'tickets' => $tickets
+    ];
+    
+    $this->view('posts/reports_close', $data);
+  }
 
+else if(empty($data['severity'])){
+          $status='Close';
+    $tickets = $this->ticketModel->getcloseTickets2($status,$data);
+    // Check for owner
+    $data = [
+    'tickets' => $tickets
+    ];
+    
+    $this->view('posts/reports_close', $data);
+}
+else  if(empty($data['campaign']) ){
+          $status='Close';
+    $tickets = $this->ticketModel->getcloseTickets3($status,$data);
+    // Check for owner
+    $data = [
+    'tickets' => $tickets
+    ];
+    
+    $this->view('posts/reports_close', $data);
+  }
+        
+        else {
+          $status='Close';
+          $tickets = $this->ticketModel->getcloseTickets4($status,$data);
+          // Check for owner
+          $data = [
+          'tickets' => $tickets
+          ];
+          
+          $this->view('posts/reports_close', $data);
+        }
+     
+      }
+      else {
+        $status='Close';
+    $tickets = $this->ticketModel->getcloseTickets($status);
+    // Check for owner
+    $data = [
+    'tickets' => $tickets
+    ];
+    
+    $this->view('posts/reports_close', $data);
+  
+      }
+  
+    // Get existing post from model
+   
+    
+  }
 //----------------------------------------------------------------------
 
 }  
