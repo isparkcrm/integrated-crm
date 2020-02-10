@@ -31,6 +31,7 @@ $data =[
  'ordervalue' => trim($_POST['ordervalue']),
  'closuredate' => trim($_POST['closuredate']),
  'period' => trim($_POST['period']),
+ 'paymentperiod' => trim($_POST['paymentperiod']),
  'status' => trim($_POST['status']),
  'leadowner_err' => '',         
   'customertype_err' => '',
