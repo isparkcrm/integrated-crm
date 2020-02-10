@@ -418,7 +418,7 @@ public function Insertlead($data,$user_email)
     
             $mail-> addAddress($email_to); 
            
-               $mail-> addAddress('vijayr@futurecalls.com'); 
+              // $mail-> addAddress('vijayr@futurecalls.com'); 
              // $mail-> addAddress('sridhar@Futurecalls.com'); 
     
             $mail->Subject=$subject;
@@ -496,13 +496,8 @@ $response = curl_exec($ch);
 echo "Response: ".$response;
 curl_close($ch);  
   }
-	  	  
-     $comment_status = "1";
-<<<<<<< HEAD
+	$comment_status = "1";
 	$this->db->query('INSERT INTO lead (lead_id, leadowner, customertype, customername, company, industry,leadsource, phone, mobile, email, vertical,oem,product, leadstatus, assignee, ordervalue, closuredate,leadperiod, status, comment_status) VALUES (:tid, :leadowner, :customertype, :customername, :company, :industry,  :leadsource, :phone, :mobile, :email, :vertical, :oem,:product, :leadstatus, :assignee, :ordervalue, :closuredate,:leadperiod, :status, :comment_status)');
-=======
-	$this->db->query('INSERT INTO lead (lead_id, leadowner, customertype, customername, company, industry,leadsource, phone, mobile, email, vertical,oem,product, leadstatus, assignee, ordervalue, closuredate, status,paymentperiod, comment_status) VALUES (:tid, :leadowner, :customertype, :customername, :company, :industry,  :leadsource, :phone, :mobile, :email, :vertical, :oem,:product, :leadstatus, :assignee, :ordervalue, :closuredate, :status, :paymentperiod, :comment_status)');
->>>>>>> 4ad876f44d1e1aaaeaecadff9ed8c65b074bb90a
 	$this->db->bind(':tid', $tid);
 	$this->db->bind(':leadowner', $data['leadowner']);
 	$this->db->bind(':customertype', $data['customertype']);
@@ -522,7 +517,6 @@ curl_close($ch);
 	$this->db->bind(':closuredate', $data['closuredate']);
 	$this->db->bind(':leadperiod',$data['period']);
 	$this->db->bind(':status', $data['status']);
-	$this->db->bind(':paymentperiod', $data['paymentperiod']);
 	$this->db->bind(':comment_status', $comment_status);
 	
 	

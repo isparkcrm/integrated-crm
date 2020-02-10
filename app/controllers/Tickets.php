@@ -6,6 +6,7 @@
       $this->userModel = $this->model('User');
       $this->ticketModel = $this->model('Ticket');
       $this->campaignModel = $this->model('campaignModel'); 
+      $this->departmentModel = $this->model('department'); 
     }
  //-----------------------------------------------------------------------------------------------------------
  //----------------------------------------------------------------------------------------------------------
